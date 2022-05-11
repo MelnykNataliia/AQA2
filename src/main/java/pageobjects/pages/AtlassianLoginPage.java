@@ -1,9 +1,8 @@
-package pageobjects.pages.trello_login;
+package pageobjects.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pageobjects.pages.base.BasePage;
 
 public class AtlassianLoginPage extends BasePage {
     public AtlassianLoginPage(WebDriver driver) {
@@ -12,11 +11,16 @@ public class AtlassianLoginPage extends BasePage {
 
     @FindBy(id = "password")
     WebElement password;
+
     @FindBy(id = "login-submit")
     WebElement atlassianLoginButton;
 
-    public void loginAtlassian () {
-        password.sendKeys("Test2904");
-        atlassianLoginButton.click();
+    public void loginAtlassian(String userPassword) {
+
+        //Get data for element
+        password.sendKeys(userPassword);
+
+        //Form submitting
+        atlassianLoginButton.submit();
     }
 }

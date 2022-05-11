@@ -1,9 +1,8 @@
-package pageobjects.pages.trello_login;
+package pageobjects.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pageobjects.pages.base.BasePage;
 
 public class TrelloLoginPage extends BasePage {
     public TrelloLoginPage(WebDriver driver) {
@@ -11,12 +10,17 @@ public class TrelloLoginPage extends BasePage {
     }
 
     @FindBy(id = "user")
-    WebElement username;
+    WebElement loginName;
+
     @FindBy(id = "login")
     WebElement trelloLoginButton;
 
-    public void loginTrello() {
-        username.sendKeys("goodlucknat97@gmail.com");
+    public void loginTrello(String userName) {
+
+        //Get data for element
+        loginName.sendKeys(userName);
+
+        //Form submitting
         trelloLoginButton.click();
     }
 }

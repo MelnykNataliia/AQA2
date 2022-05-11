@@ -1,4 +1,4 @@
-package pageobjects.pages.base;
+package pageobjects.pages;
 
 import org.openqa.selenium.WebDriver;
 
@@ -7,9 +7,6 @@ public class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-    }
-
-    public BasePage() {
     }
 
     public void open(String url) {
