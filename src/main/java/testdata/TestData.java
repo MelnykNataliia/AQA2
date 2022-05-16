@@ -1,21 +1,21 @@
 package testdata;
 
 public class TestData {
-    String userName;
-    String userPassword;
+    String userNameBigom;
+    String userPasswordBigom;
 
-    public String getUserName() {
-        return userName;
+    public String getUserNameBigom() {
+        return userNameBigom;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getUserPasswordBigom() {
+        return userPasswordBigom;
     }
 
     public TestData() {
         //Fill up data
-        this.userName = "goodlucknat97@gmail.com";
-        this.userPassword = "Test2904";
+        this.userNameBigom = "thadmin";
+        this.userPasswordBigom = "tickethub";
     }
 }
 

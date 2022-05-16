@@ -6,7 +6,7 @@ public class BasePage {
     public static WebDriver driver;
 
     public BasePage(WebDriver driver) {
-        this.driver = driver;
+        BasePage.driver = driver;
     }
 
     public void open(String url) {
