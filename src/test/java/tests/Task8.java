@@ -3,7 +3,6 @@ package tests;
 import config.ChromeDriverConfiguration;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import pageobjects.pages.*;
 
 
@@ -15,72 +14,33 @@ public class Task8 extends ChromeDriverConfiguration {
     protected DepartmentsPage departments = new DepartmentsPage(driver);
     protected CategoriesPage categories = new CategoriesPage(driver);
 
-
-    private void login(LoginPage loginName, LoginPage password) {
-    }
-
     @Test
     public void testOpenDashboardPage() {
-
-        //Website login
-        login(loginName, password);
-
-        //Initialise Element
-        PageFactory.initElements(driver, dashboard);
-
-        //Go to page element
+        //Open Dashboard page
         dashboard.enterDashboardPage();
     }
 
     @Test
     public void testOpenTicketsPage() {
-
-        //Website login
-        login(loginName, password);
-
-        //Initialise Element
-        PageFactory.initElements(driver, tickets);
-
-        //Go to page element
-        tickets.enterTickets();
+        //Open Tickets page
+        tickets.enterTicketsPage();
     }
 
     @Test
     public void testOpenContactsPage() {
-
-        //Website login
-        login(loginName, password);
-
-        //Initialise Element
-        PageFactory.initElements(driver, contacts);
-
-        //Go to page element
-        contacts.enterContacts();
+        //Open Contacts page
+        contacts.enterContactsPage();
     }
 
     @Test
     public void testOpenDepartmentsPage() {
-
-        //Website login
-        login(loginName, password);
-
-        //Initialise Element
-        PageFactory.initElements(driver, departments);
-
-        //Go to page element
-        departments.enterDepartments();
+        //Open Departments page
+        departments.enterDepartmentsPage();
     }
 
     @Test
     public void testOpenCategoriesPage() {
-
-        //Website login
-        login(loginName, password);
-
-        //Initialise Element
-        PageFactory.initElements(driver, categories);
-
-        //Go to page element
-        categories.enterCategories();
+        //Open Categories page
+        categories.enterCategoriesPage();
     }
 }

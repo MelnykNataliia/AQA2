@@ -2,60 +2,37 @@ package tests;
 
 import config.ChromeDriverConfiguration;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
-import pageobjects.pages.DashboardPage;
-import pageobjects.pages.LoginPage;
-import pageobjects.pages.TicketsPage;
 
 import java.util.List;
-
-import static pageobjects.pages.DashboardPage.*;
 
 
 public class Task9 extends ChromeDriverConfiguration {
     protected WebDriver driver = ChromeDriverConfiguration.createDriver();
-    protected TicketsPage tickets = new TicketsPage(driver);
-    protected DashboardPage dashboard = new DashboardPage(driver);
-    protected DashboardPage dashboardDone = new DashboardPage(driver);
-    protected DashboardPage deadLineIsOver = new DashboardPage(driver);
-
-    private void login(LoginPage loginName, LoginPage password) {
-    }
-
 
     @Test
-    public void printTicketsPageTitles() {
+    public void testGetTitleNames() {
 
-        //Website login
-        login(loginName, password);
+        List<WebElement> ticketId = driver.findElements(By.xpath("//td[2]"));
+        for (WebElement e : ticketId){
+            System.out.println("Id" + " " + e.getText());
+        }
 
-        PageFactory.initElements(driver, tickets);
-        tickets.enterTickets();
+        List<WebElement> ticketTitle = driver.findElements(By.xpath("//td[3]"));
+        for (WebElement e : ticketTitle) {
+            System.out.println("Title" + " " + e.getText());
+        }
 
-        // Return title names using getText() method
-        System.out.printf("%10s %40s %45s %20s", TicketsPage.getTextId(), TicketsPage.getTextTitle(), TicketsPage.getTextAssignee(), TicketsPage.getTextStage());
-        System.out.println();
-        System.out.printf("%10s %70s %10s %20s", TicketsPage.getCompanyId(), TicketsPage.getCompanyTitle(), TicketsPage.getCompanyAssignee(), TicketsPage.getCompanyStage());
-    }
+        List<WebElement> ticketAssignee = driver.findElements(By.xpath("//td[6]"));
+        for (WebElement e : ticketAssignee) {
+            System.out.println("Assignee" + " " + e.getText());
+        }
 
-    @Test
-    public void printDevelopmentTitleNames() {
-        login(loginName, password);
-
-        PageFactory.initElements(driver, dashboard);
-        dashboard.enterDashboardPage();
-
-        PageFactory.initElements(driver, dashboardDone);
-        dashboardDone.enterDashboardDone();
-
-        PageFactory.initElements(driver, deadLineIsOver);
-        deadLineIsOver.enterDeadLineIsOver();
-
-        List<WebElement> devTitleNames = getDevelopmentTitleNames();
-        for (WebElement e : devTitleNames) {
-            System.out.println(e.getText());
+        List<WebElement> ticketStage = driver.findElements(By.xpath("//td[7]"));
+        for (WebElement e : ticketStage) {
+            System.out.println("Stage" + " " + e.getText());
         }
     }
 }

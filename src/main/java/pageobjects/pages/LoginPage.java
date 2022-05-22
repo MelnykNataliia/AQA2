@@ -1,30 +1,36 @@
 package pageobjects.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
-    @FindBy(id = "username")
-    WebElement loginName;
+    //Locator for login field
+    By loginName = By.id("username");
 
-    @FindBy(id = "password")
-    WebElement password;
+    //Locator for password field
+    By password = By.id("password");
 
-    @FindBy(id = "login-signin")
-    WebElement signInButton;
+    //Locator for signIn button
+    By signInButton = By.id("login-signin");
 
-    public void loginBigom(String userNameBigom) {
-        loginName.sendKeys(userNameBigom);
+    //Method to enter login
+    public void enterUsername(String user) {
+        driver.findElement(loginName).sendKeys(user);
     }
 
+    //Method to enter password
+    public void enterPassword(String pass) {
+        driver.findElement(password).sendKeys(pass);
+    }
 
-    public void passwordBigom(String userPasswordBigom) {
-        password.sendKeys(userPasswordBigom);
-        signInButton.click();
+    //Method to click on signIn button
+    public void clickSignIn() {
+        driver.findElement(signInButton).click();
     }
 }
+
