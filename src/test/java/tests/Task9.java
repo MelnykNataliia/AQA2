@@ -2,37 +2,25 @@ package tests;
 
 import config.ChromeDriverConfiguration;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
+import pageobjects.pages.LoginPage;
+import pageobjects.pages.TicketsPage;
+import testdata.TestData;
 
 
 public class Task9 extends ChromeDriverConfiguration {
     protected WebDriver driver = ChromeDriverConfiguration.createDriver();
+    protected LoginPage login = new LoginPage(driver);
 
     @Test
-    public void testGetTitleNames() {
+    public void printTicketsPageTitles() {
+        login.login(TestData.userName, TestData.userPassword);
 
-        List<WebElement> ticketId = driver.findElements(By.xpath("//td[2]"));
-        for (WebElement e : ticketId){
-            System.out.println("Id" + " " + e.getText());
-        }
+        // Return title names using getText() method
+        System.out.printf("%10s %40s %50s %20s", TicketsPage.getTextId(), TicketsPage.getTextTitle(), TicketsPage.getTextAssignee(), TicketsPage.getTextStage());
+        System.out.println();
 
-        List<WebElement> ticketTitle = driver.findElements(By.xpath("//td[3]"));
-        for (WebElement e : ticketTitle) {
-            System.out.println("Title" + " " + e.getText());
-        }
-
-        List<WebElement> ticketAssignee = driver.findElements(By.xpath("//td[6]"));
-        for (WebElement e : ticketAssignee) {
-            System.out.println("Assignee" + " " + e.getText());
-        }
-
-        List<WebElement> ticketStage = driver.findElements(By.xpath("//td[7]"));
-        for (WebElement e : ticketStage) {
-            System.out.println("Stage" + " " + e.getText());
-        }
+        // Return value of columns using getText() method
+        System.out.printf("%10s %70s %10s %25s", TicketsPage.getTextValueId(), TicketsPage.getTextValueTitle(), TicketsPage.getTextValueAssignee(), TicketsPage.getTextValueStage());
     }
 }
