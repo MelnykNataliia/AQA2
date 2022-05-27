@@ -15,6 +15,22 @@ public class DashboardPage extends BasePage {
     public void enterDashboardPage() {
         driver.findElement(dashboard).click();
     }
+
+    By dashboardDone = By.id("dashboard-done");
+
+    public void enterDashboardDone() {
+        driver.findElement(dashboardDone).click();
+    }
+
+    By deadLineIsOver = By.id("company-additional-information");
+
+    public void enterDeadLineIsOver() {
+        driver.findElement(deadLineIsOver).click();
+    }
+
+    public void getDeadLineIsOver() {
+        enterDashboardPage();
+        enterDashboardDone();
+        enterDeadLineIsOver();
+    }
 }
-
-
