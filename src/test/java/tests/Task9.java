@@ -2,7 +2,6 @@ package tests;
 
 import config.ChromeDriverConfiguration;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pageobjects.pages.DashboardPage;
@@ -16,32 +15,45 @@ import java.util.List;
 public class Task9 extends ChromeDriverConfiguration {
     protected WebDriver driver = ChromeDriverConfiguration.createDriver();
     protected LoginPage login = new LoginPage(driver);
+    protected TicketsPage tickets = new TicketsPage(driver);
     protected DashboardPage dashboard = new DashboardPage(driver);
 
-
     @Test
-    public void printTicketsTitlesAndValues() {
+    // Test prints to console title names and value of columns ID, Title, Assignee, Stage
+    public void printTicketTitleNameAndValue() {
+
+        // Website login
         login.login(TestData.userName, TestData.userPassword);
 
-        // Return title names using getText() method
-        System.out.printf("%10s %40s %50s %20s", TicketsPage.getTextId(), TicketsPage.getTextTitle(), TicketsPage.getTextAssignee(), TicketsPage.getTextStage());
-        System.out.println();
+        // Return title names
+        List<WebElement> titleNames = tickets.getTitleOfColumns();
+        tickets.getTitleNames(titleNames);
 
-        // Return value of columns using getText() method
-        System.out.printf("%10s %70s %10s %25s", TicketsPage.getTextValueId(), TicketsPage.getTextValueTitle(), TicketsPage.getTextValueAssignee(), TicketsPage.getTextValueStage());
+        // Return value of columns
+        List<WebElement> columnsValue = tickets.getValueOfColumns();
+        tickets.getColumnsValue(columnsValue);
     }
 
     @Test
-    public void print() {
+    // Test prints to console title names for category Development, Finance and ID for Priority P3
+    public void printTitleNameAndID() {
+
+        // Website login
         login.login(TestData.userName, TestData.userPassword);
+
+        // Open Dashboard page (Deadline is over)
         dashboard.getDeadLineIsOver();
 
-        List<WebElement> development = driver.findElements(By.tagName("tr"));
-        for (WebElement titles : development) {
-            List<WebElement> titleName = titles.findElements(By.xpath("//tbody/tr/td/span[contains(@style, 'background: blue')]"));
-            for (WebElement developmentTitleName : titleName) {
-                System.out.println(developmentTitleName.getText());
-            }
-        }
+        // Return all title names of Development category
+        List<WebElement> devTitles = dashboard.getDevTitleNames();
+        dashboard.getTitlesDevelopmentCategory(devTitles);
+
+        // Return all title names of Finance category
+        List<WebElement> finTitles = dashboard.getFinTitleNames();
+        dashboard.getTitleOfFinanceCategory(finTitles);
+
+        // Return all ID of priority P3
+        List<WebElement> priorityId = dashboard.getPriorityId();
+        dashboard.getIdOfPriorityP3(priorityId);
     }
 }
