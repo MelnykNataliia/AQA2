@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class TicketsPage extends BasePage {
@@ -20,81 +19,55 @@ public class TicketsPage extends BasePage {
         driver.findElement(tickets).click();
     }
 
-    // Locators and methods for column values
-    public WebElement getIdTitle() {
-        WebElement titleId = driver.findElement(By.xpath("//tbody/tr[1]/th[2]"));
-        return titleId;
-    }
+    // Return all Title names and print to the console
+    public void titleNames() {
+        List<WebElement> getTitleNames = driver.findElements(By.xpath("//tbody/tr[1]/th"));
+        for (int i = 0; i < getTitleNames.size(); i++) {
 
-    public WebElement getTitle() {
-        WebElement title = driver.findElement(By.xpath("//tbody/tr[1]/th[3]"));
-        return title;
-    }
+            if (i == 1 | i == 2 | i == 5 | i == 6) {
+                System.out.println(getTitleNames.get(i).getText());
 
-    public WebElement getAssigneeTitle() {
-        WebElement titleAssignee = driver.findElement(By.xpath("//th[contains(text(),'Assignee')]"));
-        return titleAssignee;
-    }
-
-    public WebElement getStageTitle() {
-        WebElement titleStage = driver.findElement(By.xpath("//tbody/tr[1]/th[7]"));
-        return titleStage;
-    }
-
-    public WebElement getValueId() {
-        WebElement valueId = driver.findElement(By.xpath("//tbody/tr[2]/td[2]"));
-        return valueId;
-    }
-
-    public WebElement getValueTitle() {
-        WebElement valueTitle = driver.findElement(By.xpath("//tbody/tr[2]/td[3]"));
-        return valueTitle;
-    }
-
-    public WebElement getValueAssignee() {
-        WebElement valueAssignee = driver.findElement(By.xpath("//tbody/tr[2]/td[6]"));
-        return valueAssignee;
-    }
-
-    public WebElement getValueStage() {
-        WebElement valueStage = driver.findElement(By.xpath("//tbody/tr[2]/td[7]"));
-        return valueStage;
-    }
-
-    // Return a List<WebElement> of title names
-    public List<WebElement> getTitleOfColumns() {
-        List<WebElement> titleNames = new LinkedList<>();
-        titleNames.add(getIdTitle());
-        titleNames.add(getTitle());
-        titleNames.add(getAssigneeTitle());
-        titleNames.add(getStageTitle());
-        return titleNames;
-    }
-
-    // Return a List<WebElement> of values
-    public List<WebElement> getValueOfColumns() {
-        List<WebElement> valueColumns = new LinkedList<>();
-        valueColumns.add(getValueId());
-        valueColumns.add(getValueTitle());
-        valueColumns.add(getValueAssignee());
-        valueColumns.add(getValueStage());
-        return valueColumns;
-    }
-
-    // Gets List<WebElement> and prints title names to the console
-    public void getTitleNames(List<WebElement> webElements) {
-        for (int i = 0; i < webElements.size(); i++) {
-            System.out.println(webElements.get(i).getText());
+            } else if (i > 6) {
+                break;
+            }
         }
     }
 
-    // Gets List<WebElement> and prints the values to the console
-    public void getColumnsValue(List<WebElement> webElements) {
-        for (int i = 0; i < webElements.size(); i++) {
-            System.out.println(webElements.get(i).getText());
+    // Return value of ID column and print to the console
+    public void valuesId() {
+        List<WebElement> getValues = driver.findElements(By.xpath("//tbody/tr/td[2]"));
+        for (WebElement getValue : getValues) {
+            System.out.println(getValue.getText());
+        }
+    }
+
+    // Return value of Title column and print to the console
+    public void valuesTitle() {
+        List<WebElement> getValues = driver.findElements(By.xpath("//tbody/tr/td[3]/a[1]"));
+        for (WebElement getValue : getValues) {
+            System.out.println(getValue.getText());
+        }
+    }
+
+    // Return value of Assignee column and print to the console
+    public void valuesAssignee() {
+        List<WebElement> getValues = driver.findElements(By.xpath("//tbody/tr/td[6]"));
+        for (WebElement getValue : getValues) {
+            System.out.println(getValue.getText());
+        }
+    }
+
+    // Return value of Stage column and print to the console
+    public void valuesStage() {
+        List<WebElement> getValues = driver.findElements(By.xpath("//tbody/tr/td[7]"));
+        for (WebElement getValue : getValues) {
+            System.out.println(getValue.getText());
         }
     }
 }
+
+
+
 
 
 
