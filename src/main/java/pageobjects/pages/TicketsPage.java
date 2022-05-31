@@ -21,17 +21,11 @@ public class TicketsPage extends BasePage {
 
     // Return all Title names and print to the console
     public void titleNames() {
-        List<WebElement> getTitleNames = driver.findElements(By.xpath("//tbody/tr[1]/th"));
-        for (int i = 0; i < getTitleNames.size(); i++) {
-
-            if (i == 1 | i == 2 | i == 5 | i == 6) {
-                System.out.println(getTitleNames.get(i).getText());
-
-            } else if (i > 6) {
-                break;
-            }
-        }
+        List<WebElement> getTitleNames = driver.findElements(By.xpath("//tbody/tr[1]/th[contains(text(),'  ')]"));
+        for (int i = 1; i < getTitleNames.size(); i++) {
+        System.out.println(getTitleNames.get(i).getText());
     }
+}
 
     // Return value of ID column and print to the console
     public void valuesId() {
