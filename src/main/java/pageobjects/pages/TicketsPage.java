@@ -20,7 +20,7 @@ public class TicketsPage extends BasePage {
     }
 
     // Return all title names and values of columns and print to the console
-    public void titleNames() {
+    public void titleNamesAndValues() {
         List<WebElement> getTitleNames = driver.findElements(By.xpath("//tbody/tr[1]/th[contains(text(),'  ')]"));
         for (int i = 1; i < getTitleNames.size(); i++) {
             System.out.println(getTitleNames.get(i).getText());

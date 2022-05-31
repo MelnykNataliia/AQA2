@@ -22,6 +22,6 @@ public class Task9 extends ChromeDriverConfiguration {
         login.login(TestData.userName, TestData.userPassword);
 
         // Prints to the console title names and values of columns ID, Title, Assignee, Stage
-        tickets.titleNames();
+        tickets.titleNamesAndValues();
     }
 }
