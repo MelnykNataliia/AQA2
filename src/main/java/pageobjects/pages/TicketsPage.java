@@ -19,46 +19,32 @@ public class TicketsPage extends BasePage {
         driver.findElement(tickets).click();
     }
 
-    // Return all Title names and print to the console
+    // Return all title names and values of columns and print to the console
     public void titleNames() {
         List<WebElement> getTitleNames = driver.findElements(By.xpath("//tbody/tr[1]/th[contains(text(),'  ')]"));
         for (int i = 1; i < getTitleNames.size(); i++) {
-        System.out.println(getTitleNames.get(i).getText());
-    }
-}
-
-    // Return value of ID column and print to the console
-    public void valuesId() {
-        List<WebElement> getValues = driver.findElements(By.xpath("//tbody/tr/td[2]"));
-        for (WebElement getValue : getValues) {
-            System.out.println(getValue.getText());
+            System.out.println(getTitleNames.get(i).getText());
         }
-    }
-
-    // Return value of Title column and print to the console
-    public void valuesTitle() {
-        List<WebElement> getValues = driver.findElements(By.xpath("//tbody/tr/td[3]/a[1]"));
-        for (WebElement getValue : getValues) {
-            System.out.println(getValue.getText());
+        List<WebElement> getValuesId = driver.findElements(By.xpath("//tbody/tr/td[2]"));
+        for (int i = 1; i < getValuesId.size(); i++) {
+            System.out.println(getValuesId.get(i).getText());
         }
-    }
-
-    // Return value of Assignee column and print to the console
-    public void valuesAssignee() {
-        List<WebElement> getValues = driver.findElements(By.xpath("//tbody/tr/td[6]"));
-        for (WebElement getValue : getValues) {
-            System.out.println(getValue.getText());
+        List<WebElement> getValuesTitle = driver.findElements(By.xpath("//tbody/tr/td[3]/a[1]"));
+        for (int i = 1; i < getValuesTitle.size(); i++) {
+            System.out.println(getValuesTitle.get(i).getText());
         }
-    }
-
-    // Return value of Stage column and print to the console
-    public void valuesStage() {
-        List<WebElement> getValues = driver.findElements(By.xpath("//tbody/tr/td[7]"));
-        for (WebElement getValue : getValues) {
-            System.out.println(getValue.getText());
+        List<WebElement> getValuesAssignee = driver.findElements(By.xpath("//tbody/tr/td[6]"));
+        for (int i = 1; i < getValuesAssignee.size(); i++) {
+            System.out.println(getValuesAssignee.get(i).getText());
+        }
+        List<WebElement> getValuesStage = driver.findElements(By.xpath("//tbody/tr/td[7]"));
+        for (int i = 1; i < getValuesStage.size(); i++) {
+            System.out.println(getValuesStage.get(i).getText());
         }
     }
 }
+
+
 
 
 
