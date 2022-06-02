@@ -15,13 +15,13 @@ public class Task9 extends ChromeDriverConfiguration {
 
 
     @Test
-    // Test prints to console title names and values of columns ID, Title, Assignee, Stage
+    // Test prints to console title names and values of columns
     public void printTitleNamesAndValues() {
 
         // Website login
         login.login(TestData.userName, TestData.userPassword);
 
-        // Prints to the console title names and values of columns ID, Title, Assignee, Stage
-        tickets.titleNamesAndValues();
+        // Prints to the console title names and values of columns
+        tickets.getAll();
     }
 }

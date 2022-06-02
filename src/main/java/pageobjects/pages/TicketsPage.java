@@ -19,28 +19,21 @@ public class TicketsPage extends BasePage {
         driver.findElement(tickets).click();
     }
 
-    // Return all title names and values of columns and print to the console
-    public void titleNamesAndValues() {
-        List<WebElement> getTitleNames = driver.findElements(By.xpath("//tbody/tr[1]/th[contains(text(),'  ')]"));
-        for (int i = 1; i < getTitleNames.size(); i++) {
-            System.out.println(getTitleNames.get(i).getText());
+    // Getting list of elements and printing to the console
+    public void getAllTitlesAndValues(By webElements) {
+        List<WebElement> titleNames = driver.findElements(webElements);
+        for (int i = 1; i < titleNames.size(); i++) {
+            System.out.println(titleNames.get(i).getText());
         }
-        List<WebElement> getValuesId = driver.findElements(By.xpath("//tbody/tr/td[2]"));
-        for (int i = 1; i < getValuesId.size(); i++) {
-            System.out.println(getValuesId.get(i).getText());
-        }
-        List<WebElement> getValuesTitle = driver.findElements(By.xpath("//tbody/tr/td[3]/a[1]"));
-        for (int i = 1; i < getValuesTitle.size(); i++) {
-            System.out.println(getValuesTitle.get(i).getText());
-        }
-        List<WebElement> getValuesAssignee = driver.findElements(By.xpath("//tbody/tr/td[6]"));
-        for (int i = 1; i < getValuesAssignee.size(); i++) {
-            System.out.println(getValuesAssignee.get(i).getText());
-        }
-        List<WebElement> getValuesStage = driver.findElements(By.xpath("//tbody/tr/td[7]"));
-        for (int i = 1; i < getValuesStage.size(); i++) {
-            System.out.println(getValuesStage.get(i).getText());
-        }
+    }
+
+    // Getting locators for elements
+    public void getAll() {
+        this.getAllTitlesAndValues(By.xpath("//tbody/tr[1]/th[contains(text(),'  ')]"));
+        this.getAllTitlesAndValues(By.xpath("//tbody/tr/td[2]"));
+        this.getAllTitlesAndValues(By.xpath("//tbody/tr/td[3]/a[1]"));
+        this.getAllTitlesAndValues(By.xpath("//tbody/tr/td[6]"));
+        this.getAllTitlesAndValues(By.xpath("//tbody/tr/td[7]"));
     }
 }
 
