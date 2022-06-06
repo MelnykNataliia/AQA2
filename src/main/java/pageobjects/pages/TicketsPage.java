@@ -26,18 +26,7 @@ public class TicketsPage extends BasePage {
             System.out.println(titleNames.get(i).getText());
         }
     }
-
-    // Getting locators for elements
-    public void getAll() {
-        this.getAllTitlesAndValues(By.xpath("//tbody/tr[1]/th[contains(text(),'  ')]"));
-        this.getAllTitlesAndValues(By.xpath("//tbody/tr/td[2]"));
-        this.getAllTitlesAndValues(By.xpath("//tbody/tr/td[3]/a[1]"));
-        this.getAllTitlesAndValues(By.xpath("//tbody/tr/td[6]"));
-        this.getAllTitlesAndValues(By.xpath("//tbody/tr/td[7]"));
-    }
 }
-
-
 
 
 
