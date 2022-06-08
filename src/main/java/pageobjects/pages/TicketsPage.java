@@ -26,6 +26,29 @@ public class TicketsPage extends BasePage {
             System.out.println(titleNames.get(i).getText());
         }
     }
+
+    // Getting locators for elements
+    public void getTitles() {
+        this.getAllTitlesAndValues(By.xpath("//tbody/tr[1]/th[contains(text(),'  ')]"));
+    }
+
+    public void getValuesID() {
+        this.getAllTitlesAndValues(By.xpath("//tbody/tr/td[2]"));
+    }
+
+    public void getValuesTitle() {
+        this.getAllTitlesAndValues(By.xpath("//tbody/tr/td[3]/a[1]"));
+
+    }
+
+    public void getValuesAssignee() {
+        this.getAllTitlesAndValues(By.xpath("//tbody/tr/td[6]"));
+
+    }
+
+    public void getValuesStage() {
+        this.getAllTitlesAndValues(By.xpath("//tbody/tr/td[7]"));
+    }
 }
 
 

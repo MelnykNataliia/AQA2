@@ -2,7 +2,6 @@ package tests;
 
 import config.ChromeDriverConfiguration;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import pageobjects.pages.DashboardPage;
 import pageobjects.pages.LoginPage;
@@ -25,18 +24,31 @@ public class Task9 extends ChromeDriverConfiguration {
         login.login(TestData.userName, TestData.userPassword);
 
         // Prints to the console all title names
-        tickets.getAllTitlesAndValues(By.xpath("//tbody/tr[1]/th[contains(text(),'  ')]"));
+        tickets.getTitles();
 
         // Prints to the console values of ID column
-        tickets.getAllTitlesAndValues(By.xpath("//tbody/tr/td[2]"));
+        tickets.getValuesID();
 
         // Prints to the console values of Title column
-        tickets.getAllTitlesAndValues(By.xpath("//tbody/tr/td[3]/a[1]"));
+        tickets.getValuesTitle();
 
         // Prints to the console values of Assignee column
-        tickets.getAllTitlesAndValues(By.xpath("//tbody/tr/td[6]"));
+        tickets.getValuesAssignee();
 
         // Prints to the console values of Stage column
-        tickets.getAllTitlesAndValues(By.xpath("//tbody/tr/td[7]"));
+        tickets.getValuesStage();
+    }
+
+    @Test
+    // Test prints to console title names for category Development, Finance and ID for Priority P3
+    public void printTitleNamesAndID() {
+        // Website login
+        login.login(TestData.userName, TestData.userPassword);
+
+        // Open Dashboard page (Deadline is over)
+        dashboard.getDeadLineIsOver();
+
+        // Prints to the console all title names
+        dashboard.getDevTitle();
     }
 }

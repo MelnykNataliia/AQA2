@@ -2,8 +2,12 @@ package pageobjects.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class DashboardPage extends BasePage {
+
     public DashboardPage(WebDriver driver) {
         super(driver);
     }
@@ -35,5 +39,19 @@ public class DashboardPage extends BasePage {
         enterDashboardPage();
         enterDashboardDone();
         enterDeadLineIsOver();
+    }
+
+    // Getting list of elements and printing to the console
+    public void getAllTitlesAndID(By webElements) {
+
+
+        List<WebElement> titleNames = driver.findElements(webElements);
+        for (int i = 0; i < titleNames.size(); i++) {
+            System.out.println(titleNames.get(i).getAttribute("textContent"));
+        }
+    }
+
+    public void getDevTitle() {
+        this.getAllTitlesAndID(By.xpath("//tbody/tr/td[9]/span[1]"));
     }
 }
