@@ -12,22 +12,20 @@ public class DashboardPage extends BasePage {
         super(driver);
     }
 
-    // Locator for dashboard field
+    // Locators for dashboard fields
     By dashboard = By.id("menu-dashboard");
+    By dashboardDone = By.id("dashboard-done");
+    By deadLineIsOver = By.id("company-additional-information");
 
     // Method to enter dashboard
     public void enterDashboardPage() {
         driver.findElement(dashboard).click();
     }
 
-    By dashboardDone = By.id("dashboard-done");
-
     // Method to enter "Done deadline" dashboard
     public void enterDashboardDone() {
         driver.findElement(dashboardDone).click();
     }
-
-    By deadLineIsOver = By.id("company-additional-information");
 
     // Method to enter "Deadline is over" via collapse element
     public void enterDeadLineIsOver() {
@@ -43,8 +41,6 @@ public class DashboardPage extends BasePage {
 
     // Getting list of elements and printing to the console
     public void getAllTitlesAndID(By webElements) {
-
-
         List<WebElement> titleNames = driver.findElements(webElements);
         for (int i = 0; i < titleNames.size(); i++) {
             System.out.println(titleNames.get(i).getAttribute("textContent"));
@@ -52,6 +48,6 @@ public class DashboardPage extends BasePage {
     }
 
     public void getDevTitle() {
-        this.getAllTitlesAndID(By.xpath("//tbody/tr/td[9]/span[1]"));
+        this.getAllTitlesAndID(By.xpath("//tbody/tr/td[9]/span[contains(@style, 'background: ')]"));
     }
 }

@@ -24,19 +24,19 @@ public class Task9 extends ChromeDriverConfiguration {
         login.login(TestData.userName, TestData.userPassword);
 
         // Prints to the console all title names
-        tickets.getTitles();
+        tickets.getAllTitlesAndValues(TicketsPage.titles);
 
         // Prints to the console values of ID column
-        tickets.getValuesID();
+        tickets.getAllTitlesAndValues(TicketsPage.valuesID);
 
         // Prints to the console values of Title column
-        tickets.getValuesTitle();
+        tickets.getAllTitlesAndValues(TicketsPage.valuesTitle);
 
         // Prints to the console values of Assignee column
-        tickets.getValuesAssignee();
+        tickets.getAllTitlesAndValues(TicketsPage.valuesAssignee);
 
         // Prints to the console values of Stage column
-        tickets.getValuesStage();
+        tickets.getAllTitlesAndValues(TicketsPage.valuesStage);
     }
 
     @Test
