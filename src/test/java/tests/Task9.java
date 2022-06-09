@@ -7,6 +7,7 @@ import pageobjects.pages.DashboardPage;
 import pageobjects.pages.LoginPage;
 import pageobjects.pages.TicketsPage;
 import testdata.TestData;
+import utils.GlobalHelpers;
 
 
 public class Task9 extends ChromeDriverConfiguration {
@@ -48,7 +49,16 @@ public class Task9 extends ChromeDriverConfiguration {
         // Open Dashboard page (Deadline is over)
         dashboard.getDeadLineIsOver();
 
-        // Prints to the console all title names
-        dashboard.getDevTitle();
+        // Page load delay
+        GlobalHelpers.sleepWait(3000);
+
+        // Prints to the console all title names for Category = "Разработка"
+        dashboard.getTitleNamesAndId(DashboardPage.categories, DashboardPage.titleNames, DashboardPage.development);
+
+        // Prints to the console all title names for Category = "Финансы"
+        dashboard.getTitleNamesAndId(DashboardPage.categories, DashboardPage.titleNames, DashboardPage.finance);
+
+        // Prints to the console all ID of Priority = P3
+        dashboard.getTitleNamesAndId(DashboardPage.priority, DashboardPage.id, DashboardPage.priorityP3);
     }
 }

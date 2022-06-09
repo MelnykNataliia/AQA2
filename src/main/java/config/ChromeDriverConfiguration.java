@@ -23,14 +23,13 @@ public class ChromeDriverConfiguration {
 
     @BeforeEach
     public void start() {
-        //Website open
         basePage.open("http://176.36.27.131:8180/#/login");
     }
 
     @AfterEach
     public void finish() {
         try {
-            Thread.sleep(20000);
+            Thread.sleep(5000);
         } catch (
                 InterruptedException e) {
             e.printStackTrace();

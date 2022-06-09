@@ -17,6 +17,18 @@ public class DashboardPage extends BasePage {
     By dashboardDone = By.id("dashboard-done");
     By deadLineIsOver = By.id("company-additional-information");
 
+    // Category`s locators
+    public static By categories = By.xpath("//tbody/tr/td[9]/span[1]");
+    public static By titleNames = By.xpath("//tbody/tr/td[3]/a[1]");
+    public static By priority = By.xpath("//tbody/tr/td[5]");
+    public static By id = By.xpath("//tbody/tr/td[2]");
+
+    // Names of searching categories
+    public static String development = "РАЗРАБОТКА";
+    public static String finance = "ФИНАНСЫ";
+    public static String priorityP3 = "P3";
+
+
     // Method to enter dashboard
     public void enterDashboardPage() {
         driver.findElement(dashboard).click();
@@ -39,15 +51,19 @@ public class DashboardPage extends BasePage {
         enterDeadLineIsOver();
     }
 
-    // Getting list of elements and printing to the console
-    public void getAllTitlesAndID(By webElements) {
-        List<WebElement> titleNames = driver.findElements(webElements);
-        for (int i = 0; i < titleNames.size(); i++) {
-            System.out.println(titleNames.get(i).getAttribute("textContent"));
-        }
+    // Method gets text by index
+    public void getWebElementsTitleByIndex(List<WebElement> webElementList, int i) {
+        System.out.println(webElementList.get(i).getText());
     }
 
-    public void getDevTitle() {
-        this.getAllTitlesAndID(By.xpath("//tbody/tr/td[9]/span[contains(@style, 'background: ')]"));
+    // Getting list of elements and printing to the console
+    public void getTitleNamesAndId(By categoriesWebElements, By titlesWebElements, String category) {
+        List<WebElement> categories = driver.findElements(categoriesWebElements);
+        List<WebElement> titles = driver.findElements(titlesWebElements);
+        for (int i = 0; i < categories.size(); i++) {
+            if (categories.get(i).getText().trim().equals(category)) {
+                getWebElementsTitleByIndex(titles, i);
+            }
+        }
     }
 }
