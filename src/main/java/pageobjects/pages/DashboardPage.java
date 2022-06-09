@@ -23,12 +23,6 @@ public class DashboardPage extends BasePage {
     public static By priority = By.xpath("//tbody/tr/td[5]");
     public static By id = By.xpath("//tbody/tr/td[2]");
 
-    // Names of searching categories
-    public static String development = "РАЗРАБОТКА";
-    public static String finance = "ФИНАНСЫ";
-    public static String priorityP3 = "P3";
-
-
     // Method to enter dashboard
     public void enterDashboardPage() {
         driver.findElement(dashboard).click();
