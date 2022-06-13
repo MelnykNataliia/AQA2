@@ -12,7 +12,19 @@ public class TicketsPage extends BasePage {
     }
 
     // Locator for tickets field
-    By tickets = By.id("menu-tickets");
+    By ticketsList = By.id("menu-tickets");
+    By createNewTicket = By.id("create-new-ticket");
+    By ticketTitle = By.id("title");
+    By ticketDescription = By.id("description");
+    By ticketCategory = By.xpath("//select[@id='categoryId']/option[7]");
+    By ticketStage = By.xpath("//select[@id='stageId']/option[2]");
+    By ticketCompany = By.id("company");
+    By ticketContact = By.id("contactId");
+    By ticketPriority = By.xpath("//select[@id='priority']/option[4]");
+    By ticketDepartment = By.id("department");
+    By ticketManager = By.id("manager");
+    By ticketAddFiles = By.id("add-files");
+    By submitNewTicket = By.id("submit-btn");
 
     // Locators for title names and values of columns
     public static By titles = By.xpath("//tbody/tr[1]/th[contains(text(),'  ')]");
@@ -21,9 +33,58 @@ public class TicketsPage extends BasePage {
     public static By valuesAssignee = By.xpath("//tbody/tr/td[6]");
     public static By valuesStage = By.xpath("//tbody/tr/td[7]");
 
-    // Method to enter tickets
+
     public void enterTicketsPage() {
-        driver.findElement(tickets).click();
+        driver.findElement(ticketsList).click();
+    }
+
+    public void clickButtonNewTicket() {
+        driver.findElement(createNewTicket).click();
+    }
+
+    public void inputTicketTitle() {
+        driver.findElement(ticketTitle).sendKeys("New Ticket");
+    }
+
+    public void inputTicketDescription() {
+        driver.findElement(ticketDescription);
+    }
+
+    public void selectTicketCategory() {
+        driver.findElement(ticketCategory).click();
+    }
+
+
+    public void selectTicketStage() {
+        driver.findElement(ticketStage).click();
+    }
+
+    public void inputTicketCompany() {
+        driver.findElement(ticketCompany).sendKeys("Snowball");
+    }
+
+    public void selectTicketContact() {
+        driver.findElement(ticketContact).sendKeys("Nataliia Melnyk");
+    }
+
+    public void selectTicketPriority() {
+        driver.findElement(ticketPriority).click();
+    }
+
+    public void inputTicketDepartment() {
+        driver.findElement(ticketDepartment).sendKeys("Managers");
+    }
+
+    public void inputTicketManager() {
+        driver.findElement(ticketManager);
+    }
+
+    public void selectTicketFiles() {
+        driver.findElement(ticketAddFiles);
+    }
+
+    public void submitNewTicket() {
+        driver.findElement(submitNewTicket).click();
     }
 
     // Getting list of elements and printing to the console
