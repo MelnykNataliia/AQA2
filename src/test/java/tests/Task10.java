@@ -18,20 +18,36 @@ public class Task10 extends ChromeDriverConfiguration {
     protected СompaniesPage companies = new СompaniesPage(driver);
 
     @Test
-        public void createNewTicket() {
+    public void createNewTicket() {
+
+        // Test data
+        String newTicketTitle = "New Ticket";
+        String newTicketCategory = "Test";
+        String newTicketStage = "OPEN";
+        String newTicketCompany = "Snowball";
+        String newTicketContact = "Nataliia Melnyk";
+        String newTicketPriority = "P4";
+        String newTicketDepartment = "Managers";
 
         // Website login
         login.login(TestData.userName, TestData.userPassword);
 
         // Fills all fields and submit the form for new ticket
-        tickets.fillAllFieldsForTicket();
+        tickets.fillAllFieldsForTicket(newTicketTitle, newTicketCategory, newTicketStage, newTicketCompany, newTicketContact, newTicketPriority, newTicketDepartment);
 
-        // Checking if a new ticket is in the list of tickets
-        tickets.enterTicketsPage();
+        // Checks whether a new ticket has been created
+        tickets.findNewTicket();
     }
 
     @Test
     public void createNewDepartment() {
+
+        // Test data
+        String newDepartmentTitle = "Logistics Department";
+        String newDepartmentPhone = "+44 (0)20 3893 3066";
+        String newDepartmentEmail = "logisticsnowball@gmail.com";
+        String newDepartmentCountry = "UK";
+        String newDepartmentCity = "London";
 
         // Website login
         login.login(TestData.userName, TestData.userPassword);
@@ -40,14 +56,20 @@ public class Task10 extends ChromeDriverConfiguration {
         departments.enterDepartmentsPage();
 
         // Fills all fields and submit the form for new department
-        departments.fillAllFieldsForDepartment();
+        departments.fillAllFieldsForDepartment(newDepartmentTitle, newDepartmentPhone, newDepartmentEmail, newDepartmentCountry, newDepartmentCity);
 
-        // Checking if a new department is in the list of departments
-        departments.enterDepartmentsPage();
+        // Checks whether a new department has been created
+        departments.findNewDepartment();
     }
 
     @Test
     public void createNewCompany() {
+
+        // Test data
+        String newCompanyTitle = "Logistic Ltd";
+        String newCompanyCountry = "UK";
+        String newCompanyCity = "London";
+        String newCompanyPhone = "+44 (0)20 3893 3066";
 
         // Website login
         login.login(TestData.userName, TestData.userPassword);
@@ -56,9 +78,9 @@ public class Task10 extends ChromeDriverConfiguration {
         companies.enterDepartmentsPage();
 
         // Fills all fields and submit the form for new company
-        companies.fillAllFieldsForDepartment();
+        companies.fillAllFieldsForDepartment(newCompanyTitle, newCompanyCountry, newCompanyCity, newCompanyPhone);
 
-        // Checking if a new company is in the list of companies
-        companies.enterDepartmentsPage();
+        // Checks whether a new company has been created
+        companies.findNewCompany();
     }
 }

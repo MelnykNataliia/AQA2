@@ -2,14 +2,13 @@ package pageobjects.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import testdata.TestData;
 
 public class DepartmentsPage extends BasePage {
     public DepartmentsPage(WebDriver driver) {
         super(driver);
     }
 
-    //Locator for departments field
+    // Locator for departments field
     By departmentsList = By.id("menu-departments");
     By createNewDepartmentButton = By.id("new-department");
     By departmentTitle = By.id("name");
@@ -19,21 +18,27 @@ public class DepartmentsPage extends BasePage {
     By departmentCountry = By.id("country");
     By departmentCity = By.id("city");
     By submitNewDepartmentButton = By.id("department-form-submit");
+    By checkNewDepartment = By.partialLinkText("Logistics Department");
 
     // Methods describe actions with elements
-    public void fillAllFieldsForDepartment() {
+    public void fillAllFieldsForDepartment(String newDepartmentTitle, String newDepartmentPhone, String newDepartmentEmail, String newDepartmentCountry, String newDepartmentCity) {
         driver.findElement(createNewDepartmentButton).click();
-        driver.findElement(departmentTitle).sendKeys(TestData.departmentTitle);
+        driver.findElement(departmentTitle).sendKeys(newDepartmentTitle);
         driver.findElement(departmentAddInfo).click();
-        driver.findElement(departmentPhone).sendKeys(TestData.departmentPhone);
-        driver.findElement(departmentEmail).sendKeys(TestData.departmentEmail);
-        driver.findElement(departmentCountry).sendKeys(TestData.departmentCountry);
-        driver.findElement(departmentCity).sendKeys(TestData.departmentCity);
+        driver.findElement(departmentPhone).sendKeys(newDepartmentPhone);
+        driver.findElement(departmentEmail).sendKeys(newDepartmentEmail);
+        driver.findElement(departmentCountry).sendKeys(newDepartmentCountry);
+        driver.findElement(departmentCity).sendKeys(newDepartmentCity);
         driver.findElement(submitNewDepartmentButton).click();
     }
 
-    //Method to enter departments page
+    // Method to enter departments page
     public void enterDepartmentsPage() {
         driver.findElement(departmentsList).click();
+    }
+
+    // Method finds the created department
+    public void findNewDepartment() {
+        driver.findElement(checkNewDepartment).click();
     }
 }

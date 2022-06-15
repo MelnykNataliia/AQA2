@@ -3,7 +3,6 @@ package pageobjects.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import testdata.TestData;
 
 import java.util.List;
 
@@ -16,13 +15,14 @@ public class TicketsPage extends BasePage {
     By ticketsList = By.id("menu-tickets");
     By createNewTicketButton = By.id("create-new-ticket");
     By ticketTitle = By.id("title");
-    By ticketCategory = By.xpath("//select[@id='categoryId']/option[7]");
-    By ticketStage = By.xpath("//select[@id='stageId']/option[2]");
+    By ticketCategory = By.id("categoryId");
+    By ticketStage = By.id("stageId");
     By ticketCompany = By.id("company");
     By ticketContact = By.id("contactId");
-    By ticketPriority = By.xpath("//select[@id='priority']/option[4]");
+    By ticketPriority = By.id("priority");
     By ticketDepartment = By.id("department");
     By submitNewTicketButton = By.id("submit-btn");
+    By checkNewTicket = By.partialLinkText("New Ticket");
 
     // Locators for title names and values of columns
     public static By titles = By.xpath("//tbody/tr[1]/th[contains(text(),'  ')]");
@@ -32,21 +32,26 @@ public class TicketsPage extends BasePage {
     public static By valuesStage = By.xpath("//tbody/tr/td[7]");
 
     // Methods describe actions with elements
-    public void fillAllFieldsForTicket() {
+    public void fillAllFieldsForTicket(String newTicketTitle, String newTicketCategory, String newTicketStage, String newTicketCompany, String newTicketContact, String newTicketPriority, String newTicketDepartment) {
         driver.findElement(createNewTicketButton).click();
-        driver.findElement(ticketTitle).sendKeys(TestData.ticketTitle);
-        driver.findElement(ticketCategory).click();
-        driver.findElement(ticketStage).click();
-        driver.findElement(ticketCompany).sendKeys(TestData.ticketCompany);
-        driver.findElement(ticketContact).sendKeys(TestData.ticketContact);
-        driver.findElement(ticketPriority).click();
-        driver.findElement(ticketDepartment).sendKeys(TestData.ticketDepartment);
+        driver.findElement(ticketTitle).sendKeys(newTicketTitle);
+        driver.findElement(ticketCategory).sendKeys(newTicketCategory);
+        driver.findElement(ticketStage).sendKeys(newTicketStage);
+        driver.findElement(ticketCompany).sendKeys(newTicketCompany);
+        driver.findElement(ticketContact).sendKeys(newTicketContact);
+        driver.findElement(ticketPriority).sendKeys(newTicketPriority);
+        driver.findElement(ticketDepartment).sendKeys(newTicketDepartment);
         driver.findElement(submitNewTicketButton).click();
     }
 
     // Method to enter tickets page
     public void enterTicketsPage() {
         driver.findElement(ticketsList).click();
+    }
+
+    // Method finds the created ticket
+    public void findNewTicket() {
+        driver.findElement(checkNewTicket).click();
     }
 
     // Getting list of elements and printing to the console
