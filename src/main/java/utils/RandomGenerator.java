@@ -19,9 +19,10 @@ public class RandomGenerator {
     }
 
     // Method generates random numbers
-    public int getRandomNumber(int bound) {
+    public int getRandomNumber(int length) {
         Random random = new Random();
-        return random.nextInt(bound);
+        int number = random.nextInt();
+        return Integer.parseInt(Integer.toString(number).substring(0, length));
     }
 
     // Method generates random boolean values

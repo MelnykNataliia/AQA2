@@ -18,7 +18,7 @@ public class Task11 {
     // Prints a randomly generated number to the console
     public void randomNumber() {
         RandomGenerator randomNumber = new RandomGenerator();
-        System.out.println(randomNumber.getRandomNumber(1000));
+        System.out.println(randomNumber.getRandomNumber(3));
     }
 
     @Test
