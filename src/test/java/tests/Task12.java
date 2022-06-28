@@ -1,0 +1,55 @@
+package tests;
+
+import config.ChromeDriverConfiguration;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
+import pageobjects.pages.LoginPage;
+import pageobjects.pages.ManagersPage;
+import testdata.TestData;
+import utils.GlobalHelpers;
+import utils.RandomGenerator;
+import java.util.HashMap;
+
+public class Task12 extends ChromeDriverConfiguration {
+    protected WebDriver driver = ChromeDriverConfiguration.createDriver();
+    protected LoginPage login = new LoginPage(driver);
+    protected ManagersPage managers = new ManagersPage(driver);
+
+    @Test
+    public void testManager() {
+        HashMap<String, String> hashMap = new HashMap<>();
+
+        // Test data
+        RandomGenerator randomManager = new RandomGenerator();
+        String firstName = randomManager.getRandomString(7);
+        String lastName = randomManager.getRandomString(9);
+        String email = randomManager.getRandomEmail(4);
+        String department = "Managers";
+        int phoneNumber = randomManager.getRandomNumber(10);
+        String skype = randomManager.getRandomSkype(11);
+
+        // Website login
+        login.login(TestData.userName, TestData.userPassword);
+
+        // Open Managers page
+        managers.enterManagersPage();
+
+        // Page load delay
+        GlobalHelpers.sleepWait(5000);
+
+        // Saves generated data
+        hashMap.put("firstName", firstName);
+        hashMap.put("lastName", lastName);
+        hashMap.put("email", email);
+        hashMap.put("department", department);
+        hashMap.put("phoneNumber", String.valueOf(phoneNumber));
+        hashMap.put("skype", skype);
+
+        // Fills all fields and submit the form for new manager
+        managers.fillAllFieldsForManager(firstName, lastName, email, department, phoneNumber, skype);
+
+        // Finds the created manager and open information
+        managers.searchManager(hashMap.get("firstName"));
+    }
+}
+
