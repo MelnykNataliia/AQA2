@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utils.GlobalHelpers;
 
+import java.util.HashMap;
+
 public class ManagersPage extends BasePage {
     public ManagersPage(WebDriver driver) {
         super(driver);
@@ -54,12 +56,18 @@ public class ManagersPage extends BasePage {
         driver.findElement(By.partialLinkText(firstName)).click();
     }
 
-    public void getAllValues(){
-        driver.findElement(name).getText();
-        driver.findElement(phone).getText();
-        driver.findElement(skype).getText();
-        driver.findElement(email).getText();
-        driver.findElement(department).getText();
-        driver.findElement(loginManager).getText();
+    public HashMap<String, String> getAllValues() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        String managerName = driver.findElement(name).getText();
+        String managerPhone = driver.findElement(phone).getText();
+        String managerSkype = driver.findElement(skype).getText();
+        String managerEmail = driver.findElement(email).getText();
+        String managerDepartment = driver.findElement(department).getText();
+        hashMap.put("name", managerName);
+        hashMap.put("phoneNumber", managerPhone);
+        hashMap.put("skype", managerSkype);
+        hashMap.put("email", managerEmail);
+        hashMap.put("department", managerDepartment);
+        return hashMap;
     }
 }

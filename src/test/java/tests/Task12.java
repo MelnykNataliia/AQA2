@@ -1,6 +1,7 @@
 package tests;
 
 import config.ChromeDriverConfiguration;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import pageobjects.pages.LoginPage;
@@ -36,7 +37,7 @@ public class Task12 extends ChromeDriverConfiguration {
         managers.enterManagersPage();
 
         // Page load delay
-        GlobalHelpers.sleepWait(3000);
+        GlobalHelpers.sleepWait(5000);
 
         // Saves generated data
         hashMap.put("firstName", firstName);
@@ -52,7 +53,10 @@ public class Task12 extends ChromeDriverConfiguration {
         // Finds the created manager and open information
         managers.searchManager(hashMap.get("firstName"));
 
-       managers.getAllValues();
+        // Comparing saved data with field values
+        HashMap<String, String> managerInfo = managers.getAllValues();
+
+        Assertions.assertSame(hashMap.get("firstName") + " " + hashMap.get("lastName"), managerInfo.get("name"));
     }
 }
 
