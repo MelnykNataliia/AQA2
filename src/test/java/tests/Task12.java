@@ -8,6 +8,7 @@ import pageobjects.pages.ManagersPage;
 import testdata.TestData;
 import utils.GlobalHelpers;
 import utils.RandomGenerator;
+
 import java.util.HashMap;
 
 public class Task12 extends ChromeDriverConfiguration {
@@ -18,9 +19,9 @@ public class Task12 extends ChromeDriverConfiguration {
     @Test
     public void testManager() {
         HashMap<String, String> hashMap = new HashMap<>();
+        RandomGenerator randomManager = new RandomGenerator();
 
         // Test data
-        RandomGenerator randomManager = new RandomGenerator();
         String firstName = randomManager.getRandomString(7);
         String lastName = randomManager.getRandomString(9);
         String email = randomManager.getRandomEmail(4);
@@ -35,21 +36,23 @@ public class Task12 extends ChromeDriverConfiguration {
         managers.enterManagersPage();
 
         // Page load delay
-        GlobalHelpers.sleepWait(5000);
+        GlobalHelpers.sleepWait(3000);
 
         // Saves generated data
         hashMap.put("firstName", firstName);
         hashMap.put("lastName", lastName);
         hashMap.put("email", email);
         hashMap.put("department", department);
-        hashMap.put("phoneNumber", String.valueOf(phoneNumber));
+        hashMap.put("phoneNumber", Integer.toString(phoneNumber));
         hashMap.put("skype", skype);
 
         // Fills all fields and submit the form for new manager
-        managers.fillAllFieldsForManager(firstName, lastName, email, department, phoneNumber, skype);
+        managers.fillAllFieldsForManager(hashMap.get("firstName"), hashMap.get("lastName"), hashMap.get("email"), hashMap.get("department"), hashMap.get("phoneNumber"), hashMap.get("skype"));
 
         // Finds the created manager and open information
         managers.searchManager(hashMap.get("firstName"));
+
+       managers.getAllValues();
     }
 }
 

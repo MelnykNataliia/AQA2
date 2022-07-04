@@ -22,13 +22,20 @@ public class ManagersPage extends BasePage {
     By searchBar = By.id("search-manager-firstname");
     By filterButton = By.id("search-manager-filter");
 
+    By name = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[1]");
+    By phone = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[2]");
+    By skype = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[3]");
+    By email = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[4]");
+    By department = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[5]");
+    By loginManager = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[6]");
+
     // Method to enter managers page
     public void enterManagersPage() {
         driver.findElement(managersList).click();
     }
 
     // Methods describe actions with elements
-    public void fillAllFieldsForManager(String firstName, String lastName, String email, String department, int phoneNumber, String skype) {
+    public void fillAllFieldsForManager(String firstName, String lastName, String email, String department, String phoneNumber, String skype) {
         driver.findElement(createNewManagerButton).click();
         driver.findElement(managerFirstName).sendKeys(firstName);
         driver.findElement(managerLastName).sendKeys(lastName);
@@ -45,5 +52,14 @@ public class ManagersPage extends BasePage {
         GlobalHelpers.sleepWait(3000);
         driver.findElement(filterButton).click();
         driver.findElement(By.partialLinkText(firstName)).click();
+    }
+
+    public void getAllValues(){
+        driver.findElement(name).getText();
+        driver.findElement(phone).getText();
+        driver.findElement(skype).getText();
+        driver.findElement(email).getText();
+        driver.findElement(department).getText();
+        driver.findElement(loginManager).getText();
     }
 }
