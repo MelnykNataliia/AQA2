@@ -4,8 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utils.GlobalHelpers;
 
-import java.util.HashMap;
-
 public class ManagersPage extends BasePage {
     public ManagersPage(WebDriver driver) {
         super(driver);
@@ -24,12 +22,12 @@ public class ManagersPage extends BasePage {
     By searchBar = By.id("search-manager-firstname");
     By filterButton = By.id("search-manager-filter");
 
-    By name = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[1]");
-    By phone = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[2]");
-    By skype = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[3]");
-    By email = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[4]");
-    By department = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[5]");
-    By loginManager = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[6]");
+    public static By name = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[1]");
+    public static By phone = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[2]");
+    public static By skype = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[3]");
+    public static By email = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[4]");
+    public static By department = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[5]");
+    public static By loginManager = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[6]");
 
     // Method to enter managers page
     public void enterManagersPage() {
@@ -54,20 +52,5 @@ public class ManagersPage extends BasePage {
         GlobalHelpers.sleepWait(3000);
         driver.findElement(filterButton).click();
         driver.findElement(By.partialLinkText(firstName)).click();
-    }
-
-    public HashMap<String, String> getAllValues() {
-        HashMap<String, String> hashMap = new HashMap<>();
-        String managerName = driver.findElement(name).getText();
-        String managerPhone = driver.findElement(phone).getText();
-        String managerSkype = driver.findElement(skype).getText();
-        String managerEmail = driver.findElement(email).getText();
-        String managerDepartment = driver.findElement(department).getText();
-        hashMap.put("name", managerName);
-        hashMap.put("phoneNumber", managerPhone);
-        hashMap.put("skype", managerSkype);
-        hashMap.put("email", managerEmail);
-        hashMap.put("department", managerDepartment);
-        return hashMap;
     }
 }
