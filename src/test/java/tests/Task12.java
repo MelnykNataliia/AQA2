@@ -2,7 +2,7 @@ package tests;
 
 import config.ChromeDriverConfiguration;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.RepeatedTest;
 import org.openqa.selenium.WebDriver;
 import pageobjects.pages.LoginPage;
 import pageobjects.pages.ManagersPage;
@@ -17,7 +17,7 @@ public class Task12 extends ChromeDriverConfiguration {
     protected LoginPage login = new LoginPage(driver);
     protected ManagersPage managers = new ManagersPage(driver);
 
-    @Test
+    @RepeatedTest(5)
     public void testManager() {
         HashMap<String, String> hashMap = new HashMap<>();
         RandomGenerator randomManager = new RandomGenerator();

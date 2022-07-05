@@ -25,7 +25,7 @@ public class ManagersPage extends BasePage {
     public static By name = By.xpath("//div[text()='Name:']/following-sibling::div/p");
     public static By phone = By.xpath("//div[text()='Phone:']/following-sibling::div/p");
     public static By skype = By.xpath("//div[text()='Skype:']/following-sibling::div/p");
-    public static By email = By.xpath("//div[text()='Email:']/following-sibling::div/p");
+    public static By email = By.xpath("//div[text()='Login:']/following-sibling::div/p");
     public static By department = By.xpath("//div[text()='Department:']/following-sibling::div/p");
 
     // Method to enter managers page
