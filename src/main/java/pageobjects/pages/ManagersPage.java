@@ -22,12 +22,11 @@ public class ManagersPage extends BasePage {
     By searchBar = By.id("search-manager-firstname");
     By filterButton = By.id("search-manager-filter");
 
-    public static By name = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[1]");
-    public static By phone = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[2]");
-    public static By skype = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[3]");
-    public static By email = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[4]");
-    public static By department = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[5]");
-    public static By loginManager = By.xpath("//p-tabpanel[1]/div[1]/div[1]/div[6]");
+    public static By name = By.xpath("//div[text()='Name:']/following-sibling::div/p");
+    public static By phone = By.xpath("//div[text()='Phone:']/following-sibling::div/p");
+    public static By skype = By.xpath("//div[text()='Skype:']/following-sibling::div/p");
+    public static By email = By.xpath("//div[text()='Email:']/following-sibling::div/p");
+    public static By department = By.xpath("//div[text()='Department:']/following-sibling::div/p");
 
     // Method to enter managers page
     public void enterManagersPage() {
@@ -39,6 +38,7 @@ public class ManagersPage extends BasePage {
         driver.findElement(createNewManagerButton).click();
         driver.findElement(managerFirstName).sendKeys(firstName);
         driver.findElement(managerLastName).sendKeys(lastName);
+        GlobalHelpers.sleepWait(2000);
         driver.findElement(managerEmail).sendKeys(email);
         driver.findElement(managerDepartment).sendKeys(department);
         driver.findElement(managerPhoneNumber).sendKeys(String.valueOf(phoneNumber));

@@ -54,7 +54,11 @@ public class Task12 extends ChromeDriverConfiguration {
         managers.searchManager(hashMap.get("firstName"));
 
         // Comparing saved data with field values
-        Assertions.assertSame(driver.findElement(ManagersPage.name).getText(), hashMap.get("firstName") + " " + hashMap.get("lastName"));
+        Assertions.assertEquals(driver.findElement(ManagersPage.name).getText(), hashMap.get("firstName") + " " + hashMap.get("lastName"));
+        Assertions.assertEquals(driver.findElement(ManagersPage.phone).getText(), hashMap.get("phoneNumber"));
+        Assertions.assertEquals(driver.findElement(ManagersPage.skype).getText(), hashMap.get("skype"));
+        Assertions.assertEquals(driver.findElement(ManagersPage.department).getText(), hashMap.get("department"));
+        Assertions.assertEquals(driver.findElement(ManagersPage.email).getText(), hashMap.get("email"));
     }
 }
 
