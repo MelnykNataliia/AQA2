@@ -9,6 +9,10 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    public static LoginPage using(WebDriver driver) {
+        return new LoginPage(driver);
+    }
+
     //Locator for login field
     By loginName = By.id("username");
 
@@ -19,13 +23,15 @@ public class LoginPage extends BasePage {
     By signInButton = By.id("login-signin");
 
     //Method to enter login
-    public void enterUsername(String userName) {
+    public LoginPage enterUsername(String userName) {
         driver.findElement(loginName).sendKeys(userName);
+        return this;
     }
 
     //Method to enter password
-    public void enterPassword(String userPassword) {
+    public LoginPage enterPassword(String userPassword) {
         driver.findElement(password).sendKeys(userPassword);
+        return this;
     }
 
     //Method to click on signIn button
@@ -33,13 +39,5 @@ public class LoginPage extends BasePage {
         driver.findElement(signInButton).click();
     }
 
-    public void login(String userName, String userPassword) {
-        //Enter login & password
-        this.enterUsername(userName);
-        this.enterPassword(userPassword);
-
-        //Click on signIn button
-        this.clickSignIn();
-    }
 }
 
