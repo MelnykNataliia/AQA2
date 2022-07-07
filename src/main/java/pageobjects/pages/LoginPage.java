@@ -23,20 +23,27 @@ public class LoginPage extends BasePage {
     By signInButton = By.id("login-signin");
 
     //Method to enter login
-    public LoginPage enterUsername(String userName) {
+    public void enterUsername(String userName) {
         driver.findElement(loginName).sendKeys(userName);
-        return this;
     }
 
     //Method to enter password
-    public LoginPage enterPassword(String userPassword) {
+    public void enterPassword(String userPassword) {
         driver.findElement(password).sendKeys(userPassword);
-        return this;
     }
 
     //Method to click on signIn button
     public void clickSignIn() {
         driver.findElement(signInButton).click();
+    }
+
+    public void login(String userName, String userPassword) {
+        //Enter login & password
+        this.enterUsername(userName);
+        this.enterPassword(userPassword);
+
+        //Click on signIn button
+        this.clickSignIn();
     }
 
 }

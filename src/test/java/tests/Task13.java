@@ -24,9 +24,7 @@ public class Task13 extends ChromeDriverConfiguration {
 
         // Website login
         LoginPage.using(driver)
-                .enterUsername(TestData.userName)
-                .enterPassword(TestData.userPassword)
-                .clickSignIn();
+                .login(TestData.userName, TestData.userPassword);
 
         // Fills all fields and submit the form for new contact
         ContactsPage.using(driver)
