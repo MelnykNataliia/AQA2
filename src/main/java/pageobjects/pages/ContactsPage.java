@@ -13,7 +13,7 @@ public class ContactsPage extends BasePage {
         return new ContactsPage(driver);
     }
 
-    //Locator for contacts field
+    // Locators for contacts field
     By contacts = By.id("menu-contacts");
     By newContact = By.id("new-contact");
     By firstName = By.id("firstName");
@@ -21,7 +21,7 @@ public class ContactsPage extends BasePage {
     By email = By.id("email");
     By submit = By.id("contact-form-submit");
 
-    //Method to enter contacts page
+    // Method to enter contacts page
     public ContactsPage enterContactsPage() {
         driver.findElement(contacts).click();
         return this;

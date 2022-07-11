@@ -8,7 +8,7 @@ public class DepartmentsPage extends BasePage {
         super(driver);
     }
 
-    // Locator for departments field
+    // Locators for departments field
     By departmentsList = By.id("menu-departments");
     By createNewDepartmentButton = By.id("new-department");
     By departmentTitle = By.id("name");

@@ -8,15 +8,15 @@ public class СompaniesPage extends BasePage {
         super(driver);
     }
 
-    // Locator for companies field
+    // Locators for companies field
     By companiesList = By.id("menu-companies");
     By createNewCompanyButton = By.id("new-company");
     By companyTitle = By.id("name");
     By companyAddInfo = By.id("company-additional-information");
     By companyCountry = By.id("company-country");
     By companyCity = By.id("company-city");
-    By companyPhone= By.id("company.phone");
-    By companyServiceProgram= By.id("company-sla-level-1");
+    By companyPhone = By.id("company.phone");
+    By companyServiceProgram = By.id("company-sla-level-1");
     By submitNewCompanyButton = By.id("company-submit-btn");
     By checkNewCompany = By.partialLinkText("Logistic Ltd");
 

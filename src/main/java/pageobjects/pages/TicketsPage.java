@@ -11,7 +11,7 @@ public class TicketsPage extends BasePage {
         super(driver);
     }
 
-    // Locator for tickets field
+    // Locators for tickets field
     By ticketsList = By.id("menu-tickets");
     By createNewTicketButton = By.id("create-new-ticket");
     By ticketTitle = By.id("title");
