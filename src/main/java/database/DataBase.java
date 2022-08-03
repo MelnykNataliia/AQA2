@@ -23,7 +23,7 @@ public class DataBase {
         Connection connection;
 
         try {
-            InputStream input = new FileInputStream("C:\\Users\\Mikhail\\IdeaProjects\\testProjectAQA2\\src\\main\\java\\database\\DBConfig.properties");
+            InputStream input = new FileInputStream("src\\main\\java\\database\\DBConfig.properties");
             Properties prop = new Properties();
             prop.load(input);
 
