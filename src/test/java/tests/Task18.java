@@ -3,11 +3,16 @@ package tests;
 import database.DataBase;
 import org.testng.annotations.Test;
 
-public class Task18 extends DataBase {
+public class Task18 {
     protected static DataBase conn = new DataBase();
 
     @Test
     public void db_connection() {
-        conn.getConnection();
+        try {
+            conn.connection();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

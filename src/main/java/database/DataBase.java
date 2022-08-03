@@ -3,25 +3,17 @@ package database;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 public class DataBase {
-    public void getConnection () {
+    Connection con;
+    Statement stmt;
 
-        System.out.println("Testing connection to PostgreSQL JDBC");
-
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("PostgreSQL JDBC Driver is not found. Include it in your library path ");
-            e.printStackTrace();
-            return;
-        }
-
-        System.out.println("PostgreSQL JDBC Driver successfully connected");
-        Connection connection;
-
+    public void connection() throws ClassNotFoundException {
         try {
             InputStream input = new FileInputStream("src\\main\\java\\database\\DBConfig.properties");
             Properties prop = new Properties();
@@ -30,25 +22,24 @@ public class DataBase {
             String db_name = prop.getProperty("db_name");
             String db_user = prop.getProperty("db_user");
             String db_pass = prop.getProperty("db_pass");
-
             try {
-                connection = DriverManager
-                        .getConnection(db_name, db_user, db_pass);
-
+                Class.forName("org.postgresql.Driver");
+                con = DriverManager.getConnection(db_name, db_user, db_pass);
             } catch (SQLException e) {
-                System.out.println("Connection Failed");
                 e.printStackTrace();
-                return;
-            }
-
-            if (connection != null) {
-                System.out.println("You successfully connected to database now");
-            } else {
-                System.out.println("Failed to make connection to database");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Statement getStatement() {
+        try {
+            stmt = con.createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stmt;
     }
 }
 
