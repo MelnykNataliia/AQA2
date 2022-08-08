@@ -31,9 +31,7 @@ public class DataBase {
     }
 
     // SQL request method that return String
-    public String getManager() throws ClassNotFoundException, SQLException {
-        String sql = "select concat(manager.first_name, ' ', manager.last_name) as full_name, phone, email from manager where phone is not null and email like '%@gmail.com'";
-
+    public String getManager(String sql) throws ClassNotFoundException, SQLException {
         this.connection();
 
         Statement statement = con.createStatement();
@@ -53,10 +51,8 @@ public class DataBase {
     }
 
     // SQL request method that return Map
-    public Map<String, String> getFullName() throws ClassNotFoundException, SQLException {
+    public Map<String, String> getFullName(String sql) throws ClassNotFoundException, SQLException {
         Map<String, String> map = new HashMap<>();
-        String sql = "select concat(manager.first_name, ' ', manager.last_name) as full_name, department.name from manager join department on manager.department_id = department.id where department.name = 'Комната добра'";
-
         this.connection();
 
         Statement statement = con.createStatement();
@@ -68,11 +64,8 @@ public class DataBase {
     }
 
     // SQL request method that return List
-    public List<String> getId() throws ClassNotFoundException, SQLException {
+    public List<String> getId(String sql) throws ClassNotFoundException, SQLException {
         List<String> financeId = new ArrayList<>();
-
-        String sql = "select ticket.id, category.name from ticket join category on ticket.category_id = category.id and ticket.done_deadline between '19.04.2018' and '03.05.2018' and category.name = 'Финансы'";
-
         this.connection();
 
         Statement statement = con.createStatement();
