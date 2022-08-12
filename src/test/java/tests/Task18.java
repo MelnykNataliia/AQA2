@@ -28,4 +28,34 @@ public class Task18 {
         // Select the ID from the table on dashboard page Done Deadline tab where Created from 19.04.2018 to 03.05.2018 and Category = "Финансы"
         System.out.println(managers.getId("select ticket.id, category.name from ticket join category on ticket.category_id = category.id and ticket.done_deadline between '19.04.2018' and '03.05.2018' and category.name = 'Финансы'"));
     }
+
+    @Test
+    public static void selectTicketTitle() throws SQLException, ClassNotFoundException {
+
+        // Select the Title from table on dashboard page Done Deadline tab where Priority = P4 and Assigned = "Татьяна Алимова"
+
+
+        System.out.println(managers.getTitle("select ticket.title, ticket.priority, manager.first_name, manager.last_name\n" +
+                "from ticket\n" +
+                "         join manager\n" +
+                "                   on ticket.assignee_id = manager.id\n" +
+                "                       and ticket.done_deadline is not null\n" +
+                "                       and ticket.priority = 'P4'\n" +
+                "                       and manager.first_name = 'Татьяна'\n" +
+                "                       and manager.last_name = 'Алымова'"));
+    }
+
+    @Test
+    public static void selectDepartmentTitle() throws SQLException, ClassNotFoundException {
+
+        // Search the Title on the departments page
+        System.out.print(managers.getDepartmentTitle("select name from department"));
+    }
+
+    @Test
+    public static void selectRandomManager() throws SQLException, ClassNotFoundException {
+
+        //  Select random Full name from the table on managers page
+        System.out.println(managers.getRandomManager("select first_name, last_name from manager order by random() limit 1"));
+    }
 }

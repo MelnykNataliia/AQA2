@@ -81,5 +81,66 @@ public class DataBase {
 
         return financeId;
     }
+
+    // SQL request method that return List
+    public List<String> getTitle(String sql) throws ClassNotFoundException, SQLException {
+        List<String> ticketTitle = new ArrayList<>();
+        this.connection();
+
+        Statement statement = con.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        while (resultSet.next()) {
+            String title = resultSet.getString("title");
+            String priority = resultSet.getString("priority");
+            String managerFirstName = resultSet.getString("first_name");
+            String managerLastName = resultSet.getString("last_name");
+
+            ticketTitle.add(title);
+            ticketTitle.add(priority);
+            ticketTitle.add(managerFirstName);
+            ticketTitle.add(managerLastName);
+        }
+
+        return ticketTitle;
+    }
+
+    // SQL request method that return String
+    public String getDepartmentTitle (String sql) throws ClassNotFoundException, SQLException {
+        this.connection();
+
+        Statement statement = con.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        StringBuilder departmentName = new StringBuilder();
+
+        while (resultSet.next()) {
+            String department = resultSet.getString("name");
+
+            departmentName.append(department);
+        }
+
+        return departmentName.toString();
+    }
+
+    // SQL request method that return String
+    public String getRandomManager(String sql) throws ClassNotFoundException, SQLException {
+        this.connection();
+
+        Statement statement = con.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        StringBuilder managersFullName = new StringBuilder();
+
+        while (resultSet.next()) {
+            String firstName = resultSet.getString("first_name");
+            String lastName = resultSet.getString("last_name");
+
+
+            managersFullName.append(firstName).append(" ").append(lastName);
+        }
+
+        return managersFullName.toString();
+    }
 }
 
