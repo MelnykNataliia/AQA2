@@ -36,11 +36,6 @@
             <version>4.3.0</version>
         </dependency>
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-devtools-v103</artifactId>
-            <version>4.3.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>5.2.2</version>
@@ -73,7 +68,6 @@
             <version>42.3.6</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

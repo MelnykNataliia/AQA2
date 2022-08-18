@@ -22,11 +22,10 @@ public class TicketsPage extends BasePage {
     By ticketCompany = By.id("company");
     By ticketContact = By.id("contactId");
     By ticketPriority = By.id("priority");
-    By ticketDepartment = By.id("department");
     By submitNewTicketButton = By.id("submit-btn");
     By submitNewInnerTicketButton = By.id("submit-btn");
-    By checkNewTicket = By.partialLinkText("New Ticket");
-    By checkNewInnerTicket = By.partialLinkText("[Inner] test ticket");
+    By checkNewTicket = By.partialLinkText("Test Ticket");
+    By checkNewInnerTicket = By.partialLinkText("Test inner ticket");
 
     // Locators for title names and values of columns
     public static By titles = By.xpath("//tbody/tr[1]/th[contains(text(),'  ')]");
@@ -36,7 +35,7 @@ public class TicketsPage extends BasePage {
     public static By valuesStage = By.xpath("//tbody/tr/td[7]");
 
     // Methods describe actions with elements
-    public void fillAllFieldsForTicket(String newTicketTitle, String newTicketCategory, String newTicketStage, String newTicketCompany, String newTicketContact, String newTicketPriority, String newTicketDepartment) {
+    public void fillAllFieldsForTicket(String newTicketTitle, String newTicketCategory, String newTicketStage, String newTicketCompany, String newTicketContact, String newTicketPriority) {
         driver.findElement(createNewTicketButton).click();
         driver.findElement(ticketTitle).sendKeys(newTicketTitle);
         driver.findElement(ticketCategory).sendKeys(newTicketCategory);
@@ -44,7 +43,6 @@ public class TicketsPage extends BasePage {
         driver.findElement(ticketCompany).sendKeys(newTicketCompany);
         driver.findElement(ticketContact).sendKeys(newTicketContact);
         driver.findElement(ticketPriority).sendKeys(newTicketPriority);
-        driver.findElement(ticketDepartment).sendKeys(newTicketDepartment);
         driver.findElement(submitNewTicketButton).click();
     }
 

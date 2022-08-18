@@ -7,3 +7,9 @@
 /.idea/vcs.xml
 /target/
 /.idea/inspectionProfiles/
+/.idea/dataSources.local.xml
+/.idea/dataSources.xml
+/.idea/sqldialects.xml
+/.idea/libraries/postgresqldriver.xml
+/.idea/selenium_devtools_v104_4_4_0_sources.xml
+
