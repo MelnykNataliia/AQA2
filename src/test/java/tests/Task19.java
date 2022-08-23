@@ -5,8 +5,7 @@ import database.DataBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import pageobjects.pages.LoginPage;
-import pageobjects.pages.TicketsPage;
+import pageobjects.pages.*;
 import testdata.TestData;
 import utils.GlobalHelpers;
 
@@ -15,7 +14,13 @@ import java.sql.SQLException;
 public class Task19 extends ChromeDriverConfiguration {
     protected WebDriver driver = ChromeDriverConfiguration.createDriver();
     protected TicketsPage tickets = new TicketsPage(driver);
+    protected СompaniesPage companies = new СompaniesPage(driver);
+    protected ManagersPage managers = new ManagersPage(driver);
+    protected CategoriesPage categories = new CategoriesPage(driver);
     protected DataBase newTicket = new DataBase();
+    protected DataBase newCompany = new DataBase();
+    protected DataBase newManager = new DataBase();
+    protected DataBase newCategory= new DataBase();
 
     @Test
     public void createNewTicket() throws SQLException, ClassNotFoundException {
@@ -79,5 +84,98 @@ public class Task19 extends ChromeDriverConfiguration {
 
         // Checks data in the table and DB
         Assertions.assertEquals(newTicket.ticketInnerTitle(selectInnerTicketTitle), newInnerTicketTitle);
+    }
+
+    @Test
+    public void createNewCompany() throws SQLException, ClassNotFoundException {
+
+        // Test data
+        String newCompanyTitle = "Containership";
+        String newCompanyCountry = "UK";
+        String newCompanyCity = "Odesa";
+        String newCompanyPhone = "+380482389330";
+        String selectCompanyTitle = "select name from company where name = 'Containership' limit 1";
+
+        // Website login
+        LoginPage.using(driver)
+                .login(TestData.userName, TestData.userPassword);
+
+        // Open Companies page
+        companies.enterDepartmentsPage();// Page load delay
+
+        // Fills all fields and submit the form for new company
+        companies.fillAllFieldsForDepartment(newCompanyTitle, newCompanyCountry, newCompanyCity, newCompanyPhone);
+
+        // Checks whether a new company has been created
+        companies.findNewCompany();
+
+        // Checks data in the table and DB by criteria Title
+        Assertions.assertEquals(newCompany.companyTitle(selectCompanyTitle), newCompanyTitle);
+    }
+
+    @Test
+    public void createNewManager() throws SQLException, ClassNotFoundException {
+
+        // Test data
+        String firstName = "TestFirstName";
+        String lastName = "TestLastName";
+        String email = "testemail@gmail.com";
+        String department = "Managers";
+        String phoneNumber = "+380482389330";
+        String skype = "testManager";
+        String selectManagerFirstName = "select first_name from manager join department on manager.department_id = department.id and first_name = 'TestFirstName' and department.name = 'Managers' limit 1";
+        String selectManagerLastName = "select last_name from manager join department on manager.department_id = department.id and last_name = 'TestLastName' and department.name = 'Managers' limit 1;";
+        String selectManagerDepartment = "select department.name from department where department.name = 'Managers'";
+
+        // Website login
+        LoginPage.using(driver)
+                .login(TestData.userName, TestData.userPassword);
+
+        // Open Managers page
+        managers.enterManagersPage();
+
+        // Page load delay
+        GlobalHelpers.sleepWait(5000);
+
+        // Fills all fields and submit the form for new manager
+        managers.fillAllFieldsForManager(firstName, lastName, email, department, phoneNumber, skype);
+
+        // Finds the created manager and open information
+        managers.searchManager(firstName);
+
+        // Checks data in the table and DB by criteria First Name, Last Name and Department Name
+        Assertions.assertEquals(newManager.managerFirstName(selectManagerFirstName), firstName);
+        Assertions.assertEquals(newManager.managerLastName(selectManagerLastName), lastName);
+        Assertions.assertEquals(newManager.managerDepartment(selectManagerDepartment), department);
+    }
+
+    @Test
+    public void createNewCategory() throws SQLException, ClassNotFoundException {
+
+        // Test data
+        String newCategoryTitle = "New Test Category";
+        String selectCategoryTitle = "select category.name from category where name = 'New Test Category' limit 1";
+
+        // Website login
+        LoginPage.using(driver)
+                .login(TestData.userName, TestData.userPassword);
+
+        // Open Categories page
+        categories.enterCategoriesPage();
+
+        // Fills all fields and submit the form for new category
+        categories.fillAllFieldsForCategory(newCategoryTitle);
+
+        // Open Categories page
+        categories.enterCategoriesPage();
+
+        // Page load delay
+        GlobalHelpers.sleepWait(3000);
+
+        // Finds the created category and open information
+        categories.findNewCategory(newCategoryTitle);
+
+        // Checks data in the table and DB
+        Assertions.assertEquals(newCategory.newCategory(selectCategoryTitle), newCategoryTitle);
     }
 }

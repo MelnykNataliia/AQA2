@@ -18,7 +18,7 @@ public class СompaniesPage extends BasePage {
     By companyPhone = By.id("company.phone");
     By companyServiceProgram = By.id("company-sla-level-1");
     By submitNewCompanyButton = By.id("company-submit-btn");
-    By checkNewCompany = By.partialLinkText("Logistic Ltd");
+    By checkNewCompany = By.partialLinkText("Containership");
 
     // Methods describe actions with elements
     public void fillAllFieldsForDepartment(String newCompanyTitle, String newCompanyCountry, String newCompanyCity, String newCompanyPhone) {

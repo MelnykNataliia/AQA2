@@ -267,5 +267,90 @@ public class DataBase {
         return ticketInnerTitle.toString();
     }
 
+    // SQL request method that return String
+    public String companyTitle(String sql) throws ClassNotFoundException, SQLException {
+        this.connection();
+
+        Statement statement = con.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        StringBuilder newCompanyTitle = new StringBuilder();
+
+        while (resultSet.next()) {
+            String title = resultSet.getString("name");
+
+            newCompanyTitle.append(title);
+        }
+        return newCompanyTitle.toString();
+    }
+
+    // SQL request method that return String
+    public String managerFirstName(String sql) throws ClassNotFoundException, SQLException {
+        this.connection();
+
+        Statement statement = con.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        StringBuilder managerName = new StringBuilder();
+
+        while (resultSet.next()) {
+            String firstName = resultSet.getString("first_name");
+
+            managerName.append(firstName);
+        }
+        return managerName.toString();
+    }
+
+    // SQL request method that return String
+    public String managerLastName(String sql) throws ClassNotFoundException, SQLException {
+        this.connection();
+
+        Statement statement = con.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        StringBuilder managerName = new StringBuilder();
+
+        while (resultSet.next()) {
+            String lastName = resultSet.getString("last_name");
+
+            managerName.append(lastName);
+        }
+        return managerName.toString();
+    }
+
+    // SQL request method that return String
+    public String managerDepartment(String sql) throws ClassNotFoundException, SQLException {
+        this.connection();
+
+        Statement statement = con.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        StringBuilder department = new StringBuilder();
+
+        while (resultSet.next()) {
+            String departmentName = resultSet.getString("name");
+
+            department.append(departmentName);
+        }
+        return department.toString();
+    }
+
+    // SQL request method that return String
+    public String newCategory(String sql) throws ClassNotFoundException, SQLException {
+        this.connection();
+
+        Statement statement = con.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        StringBuilder category = new StringBuilder();
+
+        while (resultSet.next()) {
+            String categoryTitle = resultSet.getString("name");
+
+            category.append(categoryTitle);
+        }
+        return category.toString();
+    }
+
 }
 
