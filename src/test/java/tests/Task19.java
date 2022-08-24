@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import pageobjects.pages.*;
 import testdata.TestData;
 import utils.GlobalHelpers;
+import utils.Log;
 
 import java.sql.SQLException;
 
@@ -20,7 +21,7 @@ public class Task19 extends ChromeDriverConfiguration {
     protected DataBase newTicket = new DataBase();
     protected DataBase newCompany = new DataBase();
     protected DataBase newManager = new DataBase();
-    protected DataBase newCategory= new DataBase();
+    protected DataBase newCategory = new DataBase();
 
     @Test
     public void createNewTicket() throws SQLException, ClassNotFoundException {
@@ -60,6 +61,8 @@ public class Task19 extends ChromeDriverConfiguration {
         Assertions.assertEquals(newTicket.ticketContact(selectContact), newTicketContact);
         Assertions.assertEquals(newTicket.ticketTitle(selectTitle), newTicketTitle);
         Assertions.assertEquals(newTicket.ticketPriority(selectPriority), newTicketPriority);
+
+        Log.logger();
     }
 
     @Test
@@ -84,6 +87,8 @@ public class Task19 extends ChromeDriverConfiguration {
 
         // Checks data in the table and DB
         Assertions.assertEquals(newTicket.ticketInnerTitle(selectInnerTicketTitle), newInnerTicketTitle);
+
+        Log.logger();
     }
 
     @Test
@@ -111,6 +116,8 @@ public class Task19 extends ChromeDriverConfiguration {
 
         // Checks data in the table and DB by criteria Title
         Assertions.assertEquals(newCompany.companyTitle(selectCompanyTitle), newCompanyTitle);
+
+        Log.logger();
     }
 
     @Test
@@ -147,6 +154,8 @@ public class Task19 extends ChromeDriverConfiguration {
         Assertions.assertEquals(newManager.managerFirstName(selectManagerFirstName), firstName);
         Assertions.assertEquals(newManager.managerLastName(selectManagerLastName), lastName);
         Assertions.assertEquals(newManager.managerDepartment(selectManagerDepartment), department);
+
+        Log.logger();
     }
 
     @Test
@@ -177,5 +186,7 @@ public class Task19 extends ChromeDriverConfiguration {
 
         // Checks data in the table and DB
         Assertions.assertEquals(newCategory.newCategory(selectCategoryTitle), newCategoryTitle);
+
+        Log.logger();
     }
 }
