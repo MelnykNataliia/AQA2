@@ -5,11 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class TicketsPage extends BasePage {
     public TicketsPage(WebDriver driver) {
         super(driver);
     }
+
+    Logger logger = Logger.getLogger(TicketsPage.class.getName());
 
     // Locators for tickets field
     By ticketsList = By.id("menu-tickets");
@@ -36,6 +39,9 @@ public class TicketsPage extends BasePage {
 
     // Methods describe actions with elements
     public void fillAllFieldsForTicket(String newTicketTitle, String newTicketCategory, String newTicketStage, String newTicketCompany, String newTicketContact, String newTicketPriority) {
+
+        logger.info("Filling in all fields to create a new ticket and submitting the form");
+
         driver.findElement(createNewTicketButton).click();
         driver.findElement(ticketTitle).sendKeys(newTicketTitle);
         driver.findElement(ticketCategory).sendKeys(newTicketCategory);
@@ -44,6 +50,8 @@ public class TicketsPage extends BasePage {
         driver.findElement(ticketContact).sendKeys(newTicketContact);
         driver.findElement(ticketPriority).sendKeys(newTicketPriority);
         driver.findElement(submitNewTicketButton).click();
+
+        logger.info("New ticket form successfully submitted");
     }
 
     public void fillTheFormForInnerTicket(String newInnerTicketTitle) {
@@ -60,7 +68,12 @@ public class TicketsPage extends BasePage {
 
     // Method finds the created ticket
     public void findNewTicket() {
+
+        logger.info("Searching for a created ticket");
+
         driver.findElement(checkNewTicket).click();
+
+        logger.info("A new ticket was successfully found in the tickets list");
     }
 
     public void findNewInnerTicket() {
