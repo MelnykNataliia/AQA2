@@ -37,10 +37,20 @@ public class TicketsPage extends BasePage {
     public static By valuesAssignee = By.xpath("//tbody/tr/td[6]");
     public static By valuesStage = By.xpath("//tbody/tr/td[7]");
 
+    // Method to enter tickets page
+    public void enterTicketsPage() {
+
+        logger.info("Navigating to the Tickets page");
+
+        driver.findElement(ticketsList).click();
+
+        logger.info("Navigation to the Tickets page successfully completed");
+    }
+
     // Methods describe actions with elements
     public void fillAllFieldsForTicket(String newTicketTitle, String newTicketCategory, String newTicketStage, String newTicketCompany, String newTicketContact, String newTicketPriority) {
 
-        logger.info("Filling in all fields to create a new ticket and submitting the form");
+        logger.info("Opening a form to create a new ticket, filling in all fields to create a new ticket and submitting the form");
 
         driver.findElement(createNewTicketButton).click();
         driver.findElement(ticketTitle).sendKeys(newTicketTitle);
@@ -55,15 +65,15 @@ public class TicketsPage extends BasePage {
     }
 
     public void fillTheFormForInnerTicket(String newInnerTicketTitle) {
+
+        logger.info("Filling in all fields to create a new Inner ticket and submitting the form");
+
         driver.findElement(createNewTicketButton).click();
         driver.findElement(createNewInnerTicketButton).click();
         driver.findElement(ticketInnerTitle).sendKeys(newInnerTicketTitle);
         driver.findElement(submitNewInnerTicketButton).click();
-    }
 
-    // Method to enter tickets page
-    public void enterTicketsPage() {
-        driver.findElement(ticketsList).click();
+        logger.info("New Inner ticket form successfully submitted");
     }
 
     // Method finds the created ticket
@@ -77,7 +87,12 @@ public class TicketsPage extends BasePage {
     }
 
     public void findNewInnerTicket() {
+
+        logger.info("Searching for a created Inner ticket");
+
         driver.findElement(checkNewInnerTicket).click();
+
+        logger.info("A new Inner ticket was successfully found in the tickets list");
     }
 
     // Getting list of elements and printing to the console

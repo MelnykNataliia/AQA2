@@ -72,6 +72,8 @@ public class Task19 extends ChromeDriverConfiguration {
 	@Test
 	public void createNewInnerTicket() throws SQLException, ClassNotFoundException {
 
+		logger.info("Running a test to create a new Inner ticket and check data in the table and DB");
+
 		// Test data
 		String newInnerTicketTitle = "Test inner ticket";
 		String selectInnerTicketTitle = "select title from ticket where title = 'Test inner ticket' limit 1";
@@ -91,10 +93,14 @@ public class Task19 extends ChromeDriverConfiguration {
 
 		// Checks data in the table and DB
 		Assertions.assertEquals(newTicket.ticketInnerTitle(selectInnerTicketTitle), newInnerTicketTitle);
+
+		logger.info("The test was successfully passed, the data in the table match data in the DB.");
 	}
 
 	@Test
 	public void createNewCompany() throws SQLException, ClassNotFoundException {
+
+		logger.info("Running a test to create a new company and check data in the table and DB");
 
 		// Test data
 		String newCompanyTitle = "Containership";
@@ -108,20 +114,24 @@ public class Task19 extends ChromeDriverConfiguration {
 				 .login(TestData.userName, TestData.userPassword);
 
 		// Open Companies page
-		companies.enterDepartmentsPage();// Page load delay
+		companies.enterCompaniesPage();// Page load delay
 
 		// Fills all fields and submit the form for new company
-		companies.fillAllFieldsForDepartment(newCompanyTitle, newCompanyCountry, newCompanyCity, newCompanyPhone);
+		companies.fillAllFieldsForCompany(newCompanyTitle, newCompanyCountry, newCompanyCity, newCompanyPhone);
 
 		// Checks whether a new company has been created
 		companies.findNewCompany();
 
 		// Checks data in the table and DB by criteria Title
 		Assertions.assertEquals(newCompany.companyTitle(selectCompanyTitle), newCompanyTitle);
+
+		logger.info("The test was successfully passed, the data in the table match data in the DB.");
 	}
 
 	@Test
 	public void createNewManager() throws SQLException, ClassNotFoundException {
+
+		logger.info("Running a test to create a new manager and check data in the table and DB");
 
 		// Test data
 		String firstName = "TestFirstName";
@@ -154,10 +164,14 @@ public class Task19 extends ChromeDriverConfiguration {
 		Assertions.assertEquals(newManager.managerFirstName(selectManagerFirstName), firstName);
 		Assertions.assertEquals(newManager.managerLastName(selectManagerLastName), lastName);
 		Assertions.assertEquals(newManager.managerDepartment(selectManagerDepartment), department);
+
+		logger.info("The test was successfully passed, the data in the table match data in the DB.");
 	}
 
 	@Test
 	public void createNewCategory() throws SQLException, ClassNotFoundException {
+
+		logger.info("Running a test to create a new category and check data in the table and DB");
 
 		// Test data
 		String newCategoryTitle = "New Test Category";
@@ -184,5 +198,7 @@ public class Task19 extends ChromeDriverConfiguration {
 
 		// Checks data in the table and DB
 		Assertions.assertEquals(newCategory.newCategory(selectCategoryTitle), newCategoryTitle);
+
+		logger.info("The test was successfully passed, the data in the table match data in the DB.");
 	}
 }
