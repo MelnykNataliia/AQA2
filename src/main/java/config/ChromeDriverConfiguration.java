@@ -1,11 +1,16 @@
 package config;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pageobjects.pages.BasePage;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 
 import static pageobjects.pages.BasePage.driver;
@@ -28,6 +33,18 @@ public class ChromeDriverConfiguration {
 
     @AfterEach
     public void finish() {
+        File src= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            // now copy the  screenshot to desired location using copyFile //method
+            FileUtils.copyFile(src, new File("src/main/java/screenshot/Task21_2.png"));
+        }
+
+        catch (IOException e)
+        {
+            System.out.println(e.getMessage());
+
+        }
+
         try {
             Thread.sleep(5000);
         } catch (

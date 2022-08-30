@@ -294,7 +294,7 @@ public class DataBase {
         StringBuilder managerName = new StringBuilder();
 
         while (resultSet.next()) {
-            String firstName = resultSet.getString("first_name");
+            String firstName = resultSet.getString("full_name");
 
             managerName.append(firstName);
         }
@@ -319,6 +319,23 @@ public class DataBase {
     }
 
     // SQL request method that return String
+    public String managerEmail(String sql) throws ClassNotFoundException, SQLException {
+        this.connection();
+
+        Statement statement = con.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        StringBuilder email = new StringBuilder();
+
+        while (resultSet.next()) {
+            String emailAddress = resultSet.getString("login");
+
+            email.append(emailAddress);
+        }
+        return email.toString();
+    }
+
+    // SQL request method that return String
     public String managerDepartment(String sql) throws ClassNotFoundException, SQLException {
         this.connection();
 
@@ -333,6 +350,40 @@ public class DataBase {
             department.append(departmentName);
         }
         return department.toString();
+    }
+
+    // SQL request method that return String
+    public String managerPhone(String sql) throws ClassNotFoundException, SQLException {
+        this.connection();
+
+        Statement statement = con.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        StringBuilder phone = new StringBuilder();
+
+        while (resultSet.next()) {
+            String phoneNumber = resultSet.getString("phone");
+
+            phone.append(phoneNumber);
+        }
+        return phone.toString();
+    }
+
+    // SQL request method that return String
+    public String managerSkype(String sql) throws ClassNotFoundException, SQLException {
+        this.connection();
+
+        Statement statement = con.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        StringBuilder skype = new StringBuilder();
+
+        while (resultSet.next()) {
+            String managerSkype = resultSet.getString("skype");
+
+            skype.append(managerSkype);
+        }
+        return skype.toString();
     }
 
     // SQL request method that return String
