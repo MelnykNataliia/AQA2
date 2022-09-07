@@ -5,15 +5,18 @@ import database.DataBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Listeners;
 import pageobjects.pages.LoginPage;
 import pageobjects.pages.ManagersPage;
 import testdata.TestData;
 import utils.GlobalHelpers;
+import utils.Listener;
 
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
+@Listeners(Listener.class)
 public class Task21 extends ChromeDriverConfiguration {
 	protected WebDriver driver = ChromeDriverConfiguration.createDriver();
 	protected ManagersPage managers = new ManagersPage(driver);
