@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pageobjects.pages.BasePage;
+import utils.Utility;
 
 import java.time.Duration;
 
@@ -28,7 +29,9 @@ public class ChromeDriverConfiguration {
 	}
 
 	@AfterEach
-	public void finish() {
+	public void takeScreenshot() {
+		Utility.captureScreenshot();
+
 		try {
 			Thread.sleep(5000);
 		} catch (
@@ -38,6 +41,4 @@ public class ChromeDriverConfiguration {
 		driver.quit();
 	}
 }
-
-
 

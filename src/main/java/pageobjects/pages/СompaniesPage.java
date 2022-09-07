@@ -2,6 +2,7 @@ package pageobjects.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import utils.GlobalHelpers;
 
 import java.util.logging.Logger;
 
@@ -22,7 +23,13 @@ public class СompaniesPage extends BasePage {
     By companyPhone = By.id("company.phone");
     By companyServiceProgram = By.id("company-sla-level-1");
     By submitNewCompanyButton = By.id("company-submit-btn");
-    By checkNewCompany = By.partialLinkText("Containership");
+    By checkNewCompany = By.id("name");
+    By searchButton = By.id("search-company-submit");
+
+    public static By title = By.xpath("//div[contains(text(),'Company name:')]/following-sibling::div");
+    public static By country = By.xpath("//div[contains(text(),'Country:')]/following-sibling::div");
+    public static By city = By.xpath("//div[contains(text(),'City:')]/following-sibling::div");
+    public static By phone = By.xpath("//div[contains(text(),'Phone:')]/following-sibling::div");
 
     // Method to enter companies page
     public void enterCompaniesPage() {
@@ -52,11 +59,14 @@ public class СompaniesPage extends BasePage {
     }
 
     // Method finds the created company
-    public void findNewCompany() {
+    public void findNewCompany(String newCompanyTitle) {
 
         logger.info("Searching for a created company");
 
-        driver.findElement(checkNewCompany).click();
+        driver.findElement(checkNewCompany).sendKeys(newCompanyTitle);
+        GlobalHelpers.sleepWait(3000);
+        driver.findElement(searchButton).click();
+        driver.findElement(By.partialLinkText(newCompanyTitle)).click();
 
         logger.info("A new company was successfully found in the companies list");
     }

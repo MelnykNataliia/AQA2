@@ -285,6 +285,57 @@ public class DataBase {
     }
 
     // SQL request method that return String
+    public String companyCountry(String sql) throws ClassNotFoundException, SQLException {
+        this.connection();
+
+        Statement statement = con.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        StringBuilder newCompanyCountry = new StringBuilder();
+
+        while (resultSet.next()) {
+            String country = resultSet.getString("country");
+
+            newCompanyCountry.append(country);
+        }
+        return newCompanyCountry.toString();
+    }
+
+    // SQL request method that return String
+    public String companyCity(String sql) throws ClassNotFoundException, SQLException {
+        this.connection();
+
+        Statement statement = con.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        StringBuilder newCompanyCity = new StringBuilder();
+
+        while (resultSet.next()) {
+            String city = resultSet.getString("city");
+
+            newCompanyCity.append(city);
+        }
+        return newCompanyCity.toString();
+    }
+
+    // SQL request method that return String
+    public String companyPhone(String sql) throws ClassNotFoundException, SQLException {
+        this.connection();
+
+        Statement statement = con.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        StringBuilder newCompanyPhone = new StringBuilder();
+
+        while (resultSet.next()) {
+            String phone = resultSet.getString("phone");
+
+            newCompanyPhone.append(phone);
+        }
+        return newCompanyPhone.toString();
+    }
+
+    // SQL request method that return String
     public String managerFirstName(String sql) throws ClassNotFoundException, SQLException {
         this.connection();
 

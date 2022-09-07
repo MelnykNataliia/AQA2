@@ -5,22 +5,22 @@ import database.DataBase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.Listeners;
 import pageobjects.pages.LoginPage;
 import pageobjects.pages.ManagersPage;
+import pageobjects.pages.СompaniesPage;
 import testdata.TestData;
 import utils.GlobalHelpers;
-import utils.Listener;
 
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
-@Listeners(Listener.class)
 public class Task21 extends ChromeDriverConfiguration {
 	protected WebDriver driver = ChromeDriverConfiguration.createDriver();
 	protected ManagersPage managers = new ManagersPage(driver);
+	protected СompaniesPage companies = new СompaniesPage(driver);
 	protected DataBase newManager = new DataBase();
+	protected DataBase newCompany = new DataBase();
 
 	Logger logger = Logger.getLogger(Task21.class.getName());
 
@@ -114,6 +114,83 @@ public class Task21 extends ChromeDriverConfiguration {
 		Assertions.assertEquals(newManager.managerDepartment(selectDepartment), hashMap.get("department"));
 		Assertions.assertEquals(newManager.managerPhone(selectPhoneNumber), hashMap.get("phoneNumber"));
 		Assertions.assertEquals(newManager.managerSkype(selectSkype), hashMap.get("skype"));
+
+		logger.info("Comparing was successfully passed, created parameters match DB parameters in the table");
+
+		logger.info("The test was successfully passed, entered value match created parameters in the table," +
+				"created parameters match DB parameters in the table");
+	}
+
+	@Test
+	public void createNewCompany() throws SQLException, ClassNotFoundException {
+
+		logger.info("Running a test to create a new company and check data in the table and DB");
+
+		HashMap<String, String> hashMap = new HashMap<>();
+
+		// Test data
+		String newCompanyTitle = "Containerships";
+		String newCompanyCountry = "Ukraine";
+		String newCompanyCity = "Odesa";
+		String newCompanyPhone = "+380482389330";
+
+		// SQL Queries
+		String selectCompanyTitle = "select name from company\n" +
+				"where name = 'Containerships'\n" +
+				"limit 1;";
+		String selectCompanyCountry = "select country from company\n" +
+				"where name = 'Containerships' \n" +
+				"  and company.country is not null\n" +
+				"limit 1;";
+		String selectCompanyCity = "select city from company\n" +
+				"where name = 'Containerships'\n" +
+				"  and company.city is not null\n" +
+				"limit 1;";
+		String selectCompanyPhone = "select phone from company\n" +
+				"where name = 'Containerships'\n" +
+				"  and company.phone is not null\n" +
+				"limit 1;";
+
+		// Saves data
+		hashMap.put("title", newCompanyTitle);
+		hashMap.put("country", newCompanyCountry);
+		hashMap.put("city", newCompanyCity);
+		hashMap.put("phone", newCompanyPhone);
+
+
+		// Website login
+		LoginPage.using(driver)
+				 .login(TestData.userName, TestData.userPassword);
+
+		// Open Companies page
+		companies.enterCompaniesPage();// Page load delay
+
+		// Fills all fields and submit the form for new company
+		companies.fillAllFieldsForCompany(hashMap.get("title"), hashMap.get("country"), hashMap.get("city"), hashMap.get("phone"));
+
+		// Checks whether a new company has been created
+		companies.findNewCompany(hashMap.get("title"));
+
+		logger.info("Comparing the entered value and created parameters in the table on the companies page using the assertion methods");
+
+		// Comparing the entered value and created parameters in the table on the companies page using the assertion methods
+		Assertions.assertEquals(driver.findElement(СompaniesPage.title).getText(), hashMap.get("title"));
+		Assertions.assertEquals(driver.findElement(СompaniesPage.country).getText(), hashMap.get("country"));
+		Assertions.assertEquals(driver.findElement(СompaniesPage.city).getText(), hashMap.get("city"));
+		Assertions.assertEquals(driver.findElement(СompaniesPage.phone).getText(), hashMap.get("phone"));
+
+		logger.info("Comparing was successfully passed, entered value match created parameters in the table");
+
+		// Page load delay
+		GlobalHelpers.sleepWait(5000);
+
+		logger.info("Comparing the created parameters and DB parameters in the table on the companies page using the assertion methods");
+
+		// Comparing the created parameters and DB parameters in the table on the companies page using the assertion methods
+		Assertions.assertEquals(newCompany.companyTitle(selectCompanyTitle), newCompanyTitle);
+		Assertions.assertEquals(newCompany.companyCountry(selectCompanyCountry), newCompanyCountry);
+		Assertions.assertEquals(newCompany.companyCity(selectCompanyCity), newCompanyCity);
+		Assertions.assertEquals(newCompany.companyPhone(selectCompanyPhone), newCompanyPhone);
 
 		logger.info("Comparing was successfully passed, created parameters match DB parameters in the table");
 
