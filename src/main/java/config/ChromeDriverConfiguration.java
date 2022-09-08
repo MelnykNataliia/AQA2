@@ -1,11 +1,10 @@
 package config;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import pageobjects.pages.BasePage;
-import utils.Utility;
 
 import java.time.Duration;
 
@@ -23,15 +22,13 @@ public class ChromeDriverConfiguration {
 
 	protected BasePage basePage = new BasePage(driver);
 
-	@BeforeEach
+	@BeforeTest
 	public void start() {
 		basePage.open("http://176.36.27.131:8180/#/login");
 	}
 
-	@AfterEach
-	public void takeScreenshot() {
-		Utility.captureScreenshot();
-
+	@AfterTest
+	public void finish() {
 		try {
 			Thread.sleep(5000);
 		} catch (
@@ -40,5 +37,6 @@ public class ChromeDriverConfiguration {
 		}
 		driver.quit();
 	}
+
 }
 

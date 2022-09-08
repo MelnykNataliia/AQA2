@@ -2,19 +2,23 @@ package tests;
 
 import config.ChromeDriverConfiguration;
 import database.DataBase;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Listeners;
 import pageobjects.pages.LoginPage;
 import pageobjects.pages.ManagersPage;
 import pageobjects.pages.СompaniesPage;
 import testdata.TestData;
 import utils.GlobalHelpers;
+import utils.ITestListenerClass;
 
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
+
+@Listeners(ITestListenerClass.class)
 public class Task21 extends ChromeDriverConfiguration {
 	protected WebDriver driver = ChromeDriverConfiguration.createDriver();
 	protected ManagersPage managers = new ManagersPage(driver);
@@ -24,8 +28,8 @@ public class Task21 extends ChromeDriverConfiguration {
 
 	Logger logger = Logger.getLogger(Task21.class.getName());
 
-	@Test
-	public void createManager() throws SQLException, ClassNotFoundException {
+	@Test(testName = "createManager")
+	public void createNewManager() throws SQLException, ClassNotFoundException {
 
 		logger.info("Running a test to create a new manager and compare the entered value and created parameters in the table \n" +
 				"and compare the created parameters and DB parameters in the table");
@@ -95,11 +99,11 @@ public class Task21 extends ChromeDriverConfiguration {
 		logger.info("Comparing the entered value and created parameters in the table on the managers page using the assertion methods");
 
 		// Comparing the entered value and created parameters in the table on the managers page using the assertion methods
-		Assertions.assertEquals(driver.findElement(ManagersPage.name).getText(), hashMap.get("firstName") + " " + hashMap.get("lastName"));
-		Assertions.assertEquals(driver.findElement(ManagersPage.email).getText(), hashMap.get("email"));
-		Assertions.assertEquals(driver.findElement(ManagersPage.department).getText(), hashMap.get("department"));
-		Assertions.assertEquals(driver.findElement(ManagersPage.phone).getText(), hashMap.get("phoneNumber"));
-		Assertions.assertEquals(driver.findElement(ManagersPage.skype).getText(), hashMap.get("skype"));
+		Assert.assertEquals(driver.findElement(ManagersPage.name).getText(), hashMap.get("firstName") + " " + hashMap.get("lastName"));
+		Assert.assertEquals(driver.findElement(ManagersPage.email).getText(), hashMap.get("email"));
+		Assert.assertEquals(driver.findElement(ManagersPage.department).getText(), hashMap.get("department"));
+		Assert.assertEquals(driver.findElement(ManagersPage.phone).getText(), hashMap.get("phoneNumber"));
+		Assert.assertEquals(driver.findElement(ManagersPage.skype).getText(), hashMap.get("skype"));
 
 		logger.info("Comparing was successfully passed, entered value match created parameters in the table");
 
@@ -109,11 +113,11 @@ public class Task21 extends ChromeDriverConfiguration {
 		logger.info("Comparing the created parameters and DB parameters in the table on the managers page using the assertion methods");
 
 		// Comparing the created parameters and DB parameters in the table on the managers page using the assertion methods
-		Assertions.assertEquals(newManager.managerFirstName(selectFullName), hashMap.get("firstName") + " " + hashMap.get("lastName"));
-		Assertions.assertEquals(newManager.managerEmail(selectEmail), hashMap.get("email"));
-		Assertions.assertEquals(newManager.managerDepartment(selectDepartment), hashMap.get("department"));
-		Assertions.assertEquals(newManager.managerPhone(selectPhoneNumber), hashMap.get("phoneNumber"));
-		Assertions.assertEquals(newManager.managerSkype(selectSkype), hashMap.get("skype"));
+		Assert.assertEquals(newManager.managerFirstName(selectFullName), hashMap.get("firstName") + " " + hashMap.get("lastName"));
+		Assert.assertEquals(newManager.managerEmail(selectEmail), hashMap.get("email"));
+		Assert.assertEquals(newManager.managerDepartment(selectDepartment), hashMap.get("department"));
+		Assert.assertEquals(newManager.managerPhone(selectPhoneNumber), hashMap.get("phoneNumber"));
+		Assert.assertEquals(newManager.managerSkype(selectSkype), hashMap.get("skype"));
 
 		logger.info("Comparing was successfully passed, created parameters match DB parameters in the table");
 
@@ -121,7 +125,7 @@ public class Task21 extends ChromeDriverConfiguration {
 				"created parameters match DB parameters in the table");
 	}
 
-	@Test
+	@Test(testName = "createNewCompany")
 	public void createNewCompany() throws SQLException, ClassNotFoundException {
 
 		logger.info("Running a test to create a new company and check data in the table and DB");
@@ -174,10 +178,10 @@ public class Task21 extends ChromeDriverConfiguration {
 		logger.info("Comparing the entered value and created parameters in the table on the companies page using the assertion methods");
 
 		// Comparing the entered value and created parameters in the table on the companies page using the assertion methods
-		Assertions.assertEquals(driver.findElement(СompaniesPage.title).getText(), hashMap.get("title"));
-		Assertions.assertEquals(driver.findElement(СompaniesPage.country).getText(), hashMap.get("country"));
-		Assertions.assertEquals(driver.findElement(СompaniesPage.city).getText(), hashMap.get("city"));
-		Assertions.assertEquals(driver.findElement(СompaniesPage.phone).getText(), hashMap.get("phone"));
+		Assert.assertEquals(driver.findElement(СompaniesPage.title).getText(), hashMap.get("title"));
+		Assert.assertEquals(driver.findElement(СompaniesPage.country).getText(), hashMap.get("country"));
+		Assert.assertEquals(driver.findElement(СompaniesPage.city).getText(), hashMap.get("city"));
+		Assert.assertEquals(driver.findElement(СompaniesPage.phone).getText(), hashMap.get("phone"));
 
 		logger.info("Comparing was successfully passed, entered value match created parameters in the table");
 
@@ -187,10 +191,10 @@ public class Task21 extends ChromeDriverConfiguration {
 		logger.info("Comparing the created parameters and DB parameters in the table on the companies page using the assertion methods");
 
 		// Comparing the created parameters and DB parameters in the table on the companies page using the assertion methods
-		Assertions.assertEquals(newCompany.companyTitle(selectCompanyTitle), newCompanyTitle);
-		Assertions.assertEquals(newCompany.companyCountry(selectCompanyCountry), newCompanyCountry);
-		Assertions.assertEquals(newCompany.companyCity(selectCompanyCity), newCompanyCity);
-		Assertions.assertEquals(newCompany.companyPhone(selectCompanyPhone), newCompanyPhone);
+		Assert.assertEquals(newCompany.companyTitle(selectCompanyTitle), newCompanyTitle);
+		Assert.assertEquals(newCompany.companyCountry(selectCompanyCountry), newCompanyCountry);
+		Assert.assertEquals(newCompany.companyCity(selectCompanyCity), newCompanyCity);
+		Assert.assertEquals(newCompany.companyPhone(selectCompanyPhone), newCompanyPhone);
 
 		logger.info("Comparing was successfully passed, created parameters match DB parameters in the table");
 
