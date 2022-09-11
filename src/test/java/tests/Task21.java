@@ -2,10 +2,10 @@ package tests;
 
 import config.ChromeDriverConfiguration;
 import database.DataBase;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
 import pageobjects.pages.LoginPage;
 import pageobjects.pages.ManagersPage;
 import pageobjects.pages.СompaniesPage;
@@ -28,7 +28,7 @@ public class Task21 extends ChromeDriverConfiguration {
 
 	Logger logger = Logger.getLogger(Task21.class.getName());
 
-	@Test(testName = "createManager")
+	@Test (testName = "createManager")
 	public void createNewManager() throws SQLException, ClassNotFoundException {
 
 		logger.info("Running a test to create a new manager and compare the entered value and created parameters in the table \n" +
@@ -125,7 +125,7 @@ public class Task21 extends ChromeDriverConfiguration {
 				"created parameters match DB parameters in the table");
 	}
 
-	@Test(testName = "createNewCompany")
+	@Test(testName = "createCompany")
 	public void createNewCompany() throws SQLException, ClassNotFoundException {
 
 		logger.info("Running a test to create a new company and check data in the table and DB");
@@ -201,4 +201,5 @@ public class Task21 extends ChromeDriverConfiguration {
 		logger.info("The test was successfully passed, entered value match created parameters in the table," +
 				"created parameters match DB parameters in the table");
 	}
+
 }
