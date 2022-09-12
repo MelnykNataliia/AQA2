@@ -18,14 +18,13 @@ import static pageobjects.pages.BasePage.driver;
 public class ITestListenerClass implements ITestListener {
 
 	@Override
-	public void onTestStart(ITestResult result) {
+	public void onTestFailure(ITestResult result) {
 		Method method = result.getMethod().getConstructorOrMethod().getMethod();
 		Test test = method.getAnnotation(Test.class);
 		String testName = test.testName();
 
 		captureScreenshot(testName + "_");
 	}
-
 
 	private void captureScreenshot(String fileName) {
 		TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
