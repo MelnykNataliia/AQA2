@@ -55,11 +55,11 @@ public class Task22 extends ChromeDriverConfiguration {
 		logger.info("Comparing the entered invalid values and checking the errors");
 
 		// Comparing the entered invalid values and checking the errors
-		Assert.assertFalse(contacts.isEmailValid("example.com"), contactEmail);
-		Assert.assertFalse(contacts.isEmailEmpty("isNotEmpty"), contactEmail);
-		Assert.assertFalse(contacts.validLogin(1), contactEmail);
-		Assert.assertFalse(contacts.validPrefix("pr"), ticketsPrefix);
-		Assert.assertFalse(contacts.validLastName(1), contactLastName);
+		Assert.assertFalse(((Boolean) contacts.isEmailValid("example.com")), contactEmail);
+		Assert.assertFalse(((Boolean) contacts.isEmailEmpty("example@test.com")), contactEmail);
+		Assert.assertFalse(((Boolean) contacts.validLogin("example")), contactEmail);
+		Assert.assertFalse(((Boolean) contacts.validPrefix("pr")), ticketsPrefix);
+		Assert.assertFalse(((Boolean) contacts.validLastName(1)), contactLastName);
 
 		logger.info("All errors successfully checked");
 

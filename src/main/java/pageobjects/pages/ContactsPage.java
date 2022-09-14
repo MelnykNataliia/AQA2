@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import utils.GlobalHelpers;
 
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ContactsPage extends BasePage {
@@ -69,41 +68,45 @@ public class ContactsPage extends BasePage {
 		driver.findElement(submit).click();
 	}
 
-	public boolean isEmailValid(String input) {
-		boolean isValid = false;
+	public Object isEmailValid(String input) {
+		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+				"[a-zA-Z0-9_+&*-]+)*@" +
+				"(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+				"A-Z]{2,7}$";
 
-		String expression = "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
-				+ "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-				+ "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-				+ "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-				+ "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
-				+ "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
+		Pattern pat = Pattern.compile(emailRegex);
+		if (email == null)
+			return driver.findElement(By.xpath("//div[contains(text(),'Email must be valid')]"));
+		return pat.matcher(input).matches();
+	}
 
-		Pattern pattern = Pattern.compile(expression,
-				Pattern.CASE_INSENSITIVE);
-		Matcher matcher = pattern.matcher(input);
-
-		if (matcher.matches()) {
-			isValid = true;
+	public Object isEmailEmpty(String input) {
+		if (input.isEmpty()) {
+			return driver.findElement(By.xpath("//div[contains(text(),'Email is required')]"));
 		}
-
-		return isValid;
+		return false;
 	}
 
-	public boolean isEmailEmpty(String input) {
-		return input.isEmpty();
+	public Object validLogin(String input) {
+		if (input.isEmpty()) {
+			return driver.findElement(By.xpath("//div[contains(text(),'Login is required')]"));
+		}
+		return false;
 	}
 
-	public boolean validLogin(int length) {
-		return length >= 2;
+	public Object validPrefix(String input) {
+		if (input.length() >= 3 && input.length() <= 6) {
+			return driver.findElement(By.xpath("//div[contains(text(),'Tickets prefix must be from 3 to 6 characters long')]"));
+		}
+		return false;
 	}
 
-	public boolean validPrefix(String input) {
-		return input.length() >= 3 && input.length() <= 6;
+	public Object validLastName(int length) {
+		if (length >= 2) {
+			return driver.findElement(By.xpath("//div[contains(text(),'Last name must be at least 2 characters long.')]"));
+		}
+		return false;
 	}
 
-	public boolean validLastName(int length) {
-		return length >= 2;
-	}
 }
 
