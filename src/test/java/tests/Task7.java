@@ -25,7 +25,7 @@ public class Task7 {
         Properties prop = new Properties();
         prop.load(input);
 
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Mikhail\\chromedriver_win32\\chromedriver.exe\"");
+        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         ChromeDriver driver = new ChromeDriver();
         driver.get(prop.getProperty("url"));
         WebElement username = driver.findElement(By.xpath(obj.getProperty("bigom.login.username.xpath")));

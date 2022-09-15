@@ -33,7 +33,7 @@ public class Task19 extends ChromeDriverConfiguration {
 		// Test data
 		String newTicketTitle = "Test Ticket";
 		String newTicketCategory = "Test";
-		String newTicketStage = "OPEN";
+		String newTicketStage = "CLOSED";
 		String newTicketCompany = "Snowball";
 		String newTicketContact = "Nataliia Melnyk";
 		String newTicketPriority = "P4";
@@ -55,7 +55,7 @@ public class Task19 extends ChromeDriverConfiguration {
         tickets.fillAllFieldsForTicket(newTicketTitle, newTicketCategory, newTicketStage, newTicketCompany, newTicketContact, newTicketPriority);
 
 		// Checks whether a new ticket has been created
-		tickets.findNewTicket();
+		tickets.findNewTicket(newTicketTitle);
 
 		// Checks data in the table and DB
 		Assertions.assertEquals(newTicket.ticketTitle(selectTitle), newTicketTitle);
@@ -120,7 +120,7 @@ public class Task19 extends ChromeDriverConfiguration {
 		companies.fillAllFieldsForCompany(newCompanyTitle, newCompanyCountry, newCompanyCity, newCompanyPhone);
 
 		// Checks whether a new company has been created
-		companies.findNewCompany();
+		companies.findNewCompany(newCompanyTitle);
 
 		// Checks data in the table and DB by criteria Title
 		Assertions.assertEquals(newCompany.companyTitle(selectCompanyTitle), newCompanyTitle);

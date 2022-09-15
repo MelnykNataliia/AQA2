@@ -3,6 +3,7 @@ package pageobjects.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import utils.GlobalHelpers;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -27,7 +28,8 @@ public class TicketsPage extends BasePage {
     By ticketPriority = By.id("priority");
     By submitNewTicketButton = By.id("submit-btn");
     By submitNewInnerTicketButton = By.id("submit-btn");
-    By checkNewTicket = By.partialLinkText("Test Ticket");
+    By searchTicket = By.id("search-bar");
+    By searchButton = By.xpath("//button[@id='search-bar-submit']");
     By checkNewInnerTicket = By.partialLinkText("Test inner ticket");
 
     // Locators for title names and values of columns
@@ -77,11 +79,13 @@ public class TicketsPage extends BasePage {
     }
 
     // Method finds the created ticket
-    public void findNewTicket() {
+    public void findNewTicket(String newTicketTitle) {
 
         logger.info("Searching for a created ticket");
 
-        driver.findElement(checkNewTicket).click();
+        driver.findElement(searchTicket).sendKeys(newTicketTitle);
+        GlobalHelpers.sleepWait(3000);
+        driver.findElement(searchButton).click();
 
         logger.info("A new ticket was successfully found in the tickets list");
     }

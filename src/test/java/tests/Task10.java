@@ -8,79 +8,88 @@ import pageobjects.pages.LoginPage;
 import pageobjects.pages.TicketsPage;
 import pageobjects.pages.СompaniesPage;
 import testdata.TestData;
+import utils.GlobalHelpers;
 
 
 public class Task10 extends ChromeDriverConfiguration {
-    protected WebDriver driver = ChromeDriverConfiguration.createDriver();
-    protected LoginPage login = new LoginPage(driver);
-    protected TicketsPage tickets = new TicketsPage(driver);
-    protected DepartmentsPage departments = new DepartmentsPage(driver);
-    protected СompaniesPage companies = new СompaniesPage(driver);
+	protected WebDriver driver = ChromeDriverConfiguration.createDriver();
+	protected LoginPage login = new LoginPage(driver);
+	protected TicketsPage tickets = new TicketsPage(driver);
+	protected DepartmentsPage departments = new DepartmentsPage(driver);
+	protected СompaniesPage companies = new СompaniesPage(driver);
 
-    @Test
-    public void createNewTicket() {
+	@Test
+	public void createNewTicket() {
 
-        // Test data
-        String newTicketTitle = "New Ticket";
-        String newTicketCategory = "Test";
-        String newTicketStage = "OPEN";
-        String newTicketCompany = "Snowball";
-        String newTicketContact = "Nataliia Melnyk";
-        String newTicketPriority = "P4";
-        String newTicketDepartment = "Managers";
+		// Test data
+		String newTicketTitle = "New Ticket";
+		String newTicketCategory = "Test";
+		String newTicketStage = "OPEN";
+		String newTicketCompany = "Snowball";
+		String newTicketContact = "Nataliia Melnyk";
+		String newTicketPriority = "P4";
 
-        // Website login
-        login.login(TestData.userName, TestData.userPassword);
+		// Website login
+		login.login(TestData.userName, TestData.userPassword);
 
-        // Fills all fields and submit the form for new ticket
-        tickets.fillAllFieldsForTicket(newTicketTitle, newTicketCategory, newTicketStage, newTicketCompany, newTicketContact, newTicketPriority, newTicketDepartment);
+		// Fills all fields and submit the form for new ticket
+		tickets.fillAllFieldsForTicket(newTicketTitle, newTicketCategory, newTicketStage, newTicketCompany, newTicketContact, newTicketPriority);
 
-        // Checks whether a new ticket has been created
-        tickets.findNewTicket();
-    }
+		// Page load delay
+		GlobalHelpers.sleepWait(5000);
 
-    @Test
-    public void createNewDepartment() {
+		// Checks whether a new ticket has been created
+		tickets.findNewTicket(newTicketTitle);
+	}
 
-        // Test data
-        String newDepartmentTitle = "Logistics Department";
-        String newDepartmentPhone = "+44 (0)20 3893 3066";
-        String newDepartmentEmail = "logisticsnowball@gmail.com";
-        String newDepartmentCountry = "UK";
-        String newDepartmentCity = "London";
+	@Test
+	public void createNewDepartment() {
 
-        // Website login
-        login.login(TestData.userName, TestData.userPassword);
+		// Test data
+		String newDepartmentTitle = "Logistics Department";
+		String newDepartmentPhone = "+44 (0)20 3893 3066";
+		String newDepartmentEmail = "logisticsnowball@gmail.com";
+		String newDepartmentCountry = "UK";
+		String newDepartmentCity = "London";
 
-        // Open Departments page
-        departments.enterDepartmentsPage();
+		// Website login
+		login.login(TestData.userName, TestData.userPassword);
 
-        // Fills all fields and submit the form for new department
-        departments.fillAllFieldsForDepartment(newDepartmentTitle, newDepartmentPhone, newDepartmentEmail, newDepartmentCountry, newDepartmentCity);
+		// Open Departments page
+		departments.enterDepartmentsPage();
 
-        // Checks whether a new department has been created
-        departments.findNewDepartment();
-    }
+		// Fills all fields and submit the form for new department
+		departments.fillAllFieldsForDepartment(newDepartmentTitle, newDepartmentPhone, newDepartmentEmail, newDepartmentCountry, newDepartmentCity);
 
-    @Test
-    public void createNewCompany() {
+		// Page load delay
+		GlobalHelpers.sleepWait(3000);
 
-        // Test data
-        String newCompanyTitle = "Logistic Ltd";
-        String newCompanyCountry = "UK";
-        String newCompanyCity = "London";
-        String newCompanyPhone = "+44 (0)20 3893 3066";
+		// Checks whether a new department has been created
+		departments.findNewDepartment();
+	}
 
-        // Website login
-        login.login(TestData.userName, TestData.userPassword);
+	@Test
+	public void createNewCompany() {
 
-        // Open Companies page
-        companies.enterDepartmentsPage();
+		// Test data
+		String newCompanyTitle = "Logistic Ltd";
+		String newCompanyCountry = "UK";
+		String newCompanyCity = "London";
+		String newCompanyPhone = "+44 (0)20 3893 3066";
 
-        // Fills all fields and submit the form for new company
-        companies.fillAllFieldsForDepartment(newCompanyTitle, newCompanyCountry, newCompanyCity, newCompanyPhone);
+		// Website login
+		login.login(TestData.userName, TestData.userPassword);
 
-        // Checks whether a new company has been created
-        companies.findNewCompany();
-    }
+		// Open Companies page
+		companies.enterCompaniesPage();
+
+		// Fills all fields and submit the form for new company
+		companies.fillAllFieldsForCompany(newCompanyTitle, newCompanyCountry, newCompanyCity, newCompanyPhone);
+
+		// Page load delay
+		GlobalHelpers.sleepWait(3000);
+
+		// Checks whether a new company has been created
+		companies.findNewCompany(newCompanyTitle);
+	}
 }

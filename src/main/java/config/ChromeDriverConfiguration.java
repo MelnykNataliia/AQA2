@@ -1,5 +1,7 @@
 package config;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
@@ -21,6 +23,22 @@ public class ChromeDriverConfiguration {
 	}
 
 	protected BasePage basePage = new BasePage(driver);
+
+	@BeforeEach
+	public void open() {
+		basePage.open("http://176.36.27.131:8180/#/login");
+	}
+
+	@AfterEach
+	public void close() {
+		try {
+			Thread.sleep(5000);
+		} catch (
+				InterruptedException e) {
+			e.printStackTrace();
+		}
+		driver.quit();
+	}
 
 	@BeforeTest
 	public void start() {

@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utils.GlobalHelpers;
 
+import java.util.logging.Logger;
+
 public class DevicesPage extends BasePage {
     public DevicesPage(WebDriver driver) {
         super(driver);
@@ -12,6 +14,8 @@ public class DevicesPage extends BasePage {
     public static DevicesPage using(WebDriver driver) {
         return new DevicesPage(driver);
     }
+
+    Logger logger = Logger.getLogger(DevicesPage.class.getName());
 
     // Locators for devices fields
     By devices = By.id("menu-device-list");
@@ -25,7 +29,11 @@ public class DevicesPage extends BasePage {
 
     // Method to enter devices page
     public DevicesPage enterDevicesPage() {
+        logger.info("Navigating to the Devices page");
+
         driver.findElement(devices).click();
+
+        logger.info("Navigation to the Devices page successfully completed");
         return this;
     }
 
