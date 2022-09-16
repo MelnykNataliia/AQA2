@@ -2,6 +2,7 @@ package pageobjects.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import utils.GlobalHelpers;
 
 import java.util.logging.Logger;
 
@@ -48,6 +49,7 @@ public class CategoriesPage extends BasePage {
         logger.info("Searching for a created category");
 
         driver.findElement(searchCategory).sendKeys(newCategoryTitle);
+        GlobalHelpers.sleepWait(3000);
         driver.findElement(searchButton).click();
 
         logger.info("A new category was successfully found in the categories list");

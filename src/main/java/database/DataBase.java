@@ -345,7 +345,7 @@ public class DataBase {
         StringBuilder managerName = new StringBuilder();
 
         while (resultSet.next()) {
-            String firstName = resultSet.getString("full_name");
+            String firstName = resultSet.getString("first_name");
 
             managerName.append(firstName);
         }

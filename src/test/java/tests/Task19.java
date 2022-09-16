@@ -116,8 +116,14 @@ public class Task19 extends ChromeDriverConfiguration {
 		// Open Companies page
 		companies.enterCompaniesPage();// Page load delay
 
+		// Page load delay
+		GlobalHelpers.sleepWait(2000);
+
 		// Fills all fields and submit the form for new company
 		companies.fillAllFieldsForCompany(newCompanyTitle, newCompanyCountry, newCompanyCity, newCompanyPhone);
+
+		// Page load delay
+		GlobalHelpers.sleepWait(3000);
 
 		// Checks whether a new company has been created
 		companies.findNewCompany(newCompanyTitle);
@@ -136,7 +142,7 @@ public class Task19 extends ChromeDriverConfiguration {
 		// Test data
 		String firstName = "TestFirstName";
 		String lastName = "TestLastName";
-		String email = "testemail@gmail.com";
+		String email = "test17manager@gmail.com";
 		String department = "Managers";
 		String phoneNumber = "+380482389330";
 		String skype = "testManager";
@@ -157,6 +163,9 @@ public class Task19 extends ChromeDriverConfiguration {
 		// Fills all fields and submit the form for new manager
 		managers.fillAllFieldsForManager(firstName, lastName, email, department, phoneNumber, skype);
 
+		// Page load delay
+		GlobalHelpers.sleepWait(3000);
+
 		// Finds the created manager and open information
 		managers.searchManager(firstName);
 
@@ -174,8 +183,8 @@ public class Task19 extends ChromeDriverConfiguration {
 		logger.info("Running a test to create a new category and check data in the table and DB");
 
 		// Test data
-		String newCategoryTitle = "New Test Category";
-		String selectCategoryTitle = "select category.name from category where name = 'New Test Category' limit 1";
+		String newCategoryTitle = "New Category";
+		String selectCategoryTitle = "select category.name from category where name = 'New Category' limit 1";
 
 		// Website login
 		LoginPage.using(driver)
@@ -191,7 +200,7 @@ public class Task19 extends ChromeDriverConfiguration {
 		categories.enterCategoriesPage();
 
 		// Page load delay
-		GlobalHelpers.sleepWait(3000);
+		GlobalHelpers.sleepWait(5000);
 
 		// Finds the created category and open information
 		categories.findNewCategory(newCategoryTitle);
