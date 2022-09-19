@@ -50,8 +50,6 @@ public class Task22 extends ChromeDriverConfiguration {
 					.getPrefix()
 					.submitButton();
 
-		logger.info("Navigation to the Contacts page successfully completed");
-
 		logger.info("Comparing the entered invalid values and checking the errors");
 
 		// Comparing the entered invalid values and checking the errors

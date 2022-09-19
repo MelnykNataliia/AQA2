@@ -23,6 +23,6 @@ import tests.*;
 		Task22.class
 })
 
-public class TestSuite {
+public class Task23 {
 
 }
