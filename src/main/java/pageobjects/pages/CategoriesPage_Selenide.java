@@ -1,6 +1,7 @@
 package pageobjects.pages;
 
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import utils.GlobalHelpers;
 
 import java.util.logging.Logger;
@@ -13,11 +14,30 @@ public class CategoriesPage_Selenide extends BasePage_Selenide {
 
 	Logger logger = Logger.getLogger(CategoriesPage_Selenide.class.getName());
 
+	public final SelenideElement categories = $("#menu-categories");
+	public final SelenideElement newCategoryButton = $("#new-category-btn");
+	public final SelenideElement categoryTitle = $("#name");
+	public final SelenideElement submitButton = $("#category-form-submit");
+	public final SelenideElement searchCategory = $("#search-bar");
+	public final SelenideElement searchButton = $("#search-bar-submit");
+	public final SelenideElement deleteButton = $("#category-delete-btn");
+	public final SelenideElement editCategoryButton = $("#category-stage-edit-btn");
+	public final SelenideElement detailsEditButton = $(byClassName("category-details_mini-wrap-edit-button"));
+	public final SelenideElement categoryColor = $("#color");
+	public final SelenideElement newStageButton = $("#stages-new-stage");
+	public final SelenideElement stageTitle = $("#name");
+	public final SelenideElement submitNewStageButton = $("#stage-form-submit-btn");
+	public final SelenideElement getCategory = $x("(//a[contains(text(),'New Category')])[1]");
+	public final SelenideElement editCategoryDetails = $("#category-details-edit");
+	public final SelenideElement editStageButton = $("#stages-edit-btn");
+	public final SelenideElement deleteStageButton = $("#stages-delete-btn");
+
+
 	// Method to enter categories page
 	public void enterCategoriesPage() {
 		logger.info("Navigating to the Categories page");
 
-		$("#menu-categories").click();
+		categories.click();
 
 		logger.info("Navigation to the Categories page successfully completed");
 	}
@@ -25,9 +45,9 @@ public class CategoriesPage_Selenide extends BasePage_Selenide {
 	public void fillAllFieldsForCategory(String newCategoryTitle) {
 		logger.info("Opening a form to create a new category, filling in all fields to create a new category and submitting the form");
 
-		$("#new-category-btn").click();
-		$("#name").sendKeys(newCategoryTitle);
-		$("#category-form-submit").click();
+		newCategoryButton.click();
+		categoryTitle.sendKeys(newCategoryTitle);
+		submitButton.click();
 
 		logger.info("New category form successfully submitted");
 	}
@@ -36,9 +56,9 @@ public class CategoriesPage_Selenide extends BasePage_Selenide {
 	public void findNewCategory(String newCategoryTitle) {
 		logger.info("Searching for a created category");
 
-		$("#search-bar").sendKeys(newCategoryTitle);
+		searchCategory.sendKeys(newCategoryTitle);
 		GlobalHelpers.sleepWait(3000);
-		$("#search-bar-submit").click();
+		searchButton.click();
 
 		logger.info("A new category was successfully found in the categories list");
 	}
@@ -47,7 +67,7 @@ public class CategoriesPage_Selenide extends BasePage_Selenide {
 	public void deleteCategory() {
 		logger.info("Deleting category");
 
-		$("#category-delete-btn").click();
+		deleteButton.click();
 		GlobalHelpers.sleepWait(3000);
 		Selenide.switchTo().alert().accept();
 
@@ -58,18 +78,18 @@ public class CategoriesPage_Selenide extends BasePage_Selenide {
 	public void editCategory(String newCategoryTitle, String newCategoryColor, String newCategoryStage) {
 		logger.info("Editing a created category");
 
-		$("#category-stage-edit-btn").click();
-		$(byClassName("category-details_mini-wrap-edit-button")).click();
-		$("#name").clear();
-		$("#name").sendKeys(newCategoryTitle);
+		editCategoryButton.click();
+		detailsEditButton.click();
+		categoryTitle.clear();
+		categoryTitle.sendKeys(newCategoryTitle);
 		GlobalHelpers.sleepWait(3000);
-		$("#color").clear();
-		$("#color").sendKeys(newCategoryColor);
-		$("#category-form-submit").click();
+		categoryColor.clear();
+		categoryColor.sendKeys(newCategoryColor);
+		submitButton.click();
 		GlobalHelpers.sleepWait(3000);
-		$("#stages-new-stage").click();
-		$("#name").sendKeys(newCategoryStage);
-		$("#stage-form-submit-btn").click();
+		newStageButton.click();
+		stageTitle.sendKeys(newCategoryStage);
+		submitNewStageButton.click();
 
 		logger.info("The category was successfully edit");
 	}
@@ -78,14 +98,14 @@ public class CategoriesPage_Selenide extends BasePage_Selenide {
 	public void editCategoryStage(String newCategoryStage) {
 		logger.info("Editing category stage");
 
-		$x("(//a[contains(text(),'New Category')])[1]").pressEnter();
-		$("#category-details-edit").click();
-		$("#category-form-submit").click();
+		getCategory.pressEnter();
+		editCategoryDetails.click();
+		submitButton.click();
 		GlobalHelpers.sleepWait(3000);
-		$("#stages-edit-btn").click();
-		$("#name").clear();
-		$("#name").sendKeys(newCategoryStage);
-		$("#stage-form-submit-btn").click();
+		editStageButton.click();
+		stageTitle.clear();
+		stageTitle.sendKeys(newCategoryStage);
+		submitNewStageButton.click();
 
 		logger.info("The category stage was successfully edit");
 	}
@@ -94,7 +114,7 @@ public class CategoriesPage_Selenide extends BasePage_Selenide {
 	public void deleteCategoryStage() {
 		logger.info("Deleting category stage");
 
-		$("#stages-delete-btn").click();
+		deleteStageButton.click();
 		Selenide.switchTo().alert().accept();
 
 		logger.info("The category stage was successfully delete");
