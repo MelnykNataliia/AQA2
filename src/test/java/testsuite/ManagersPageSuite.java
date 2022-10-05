@@ -10,7 +10,7 @@ import tests.Task25;
 @SelectClasses({
 		Task25.class
 })
-@ExcludeTags("CategoriesPage")
+@ExcludeTags({"CategoriesPage", "ContactsPage"})
 
 public class ManagersPageSuite {
 
