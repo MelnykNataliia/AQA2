@@ -13,7 +13,7 @@ public class Login {
 				.preemptive()
 				.basic("thadmin", "tickethub")
 				.when()
-				.post("http://176.36.27.131:8180/rest/login")
+				.post("login")
 				.then().log().all()
 				.extract().response();
 

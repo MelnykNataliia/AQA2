@@ -1,4 +1,4 @@
-package pageobjects.pages;
+package pageobjects.pages.selenide;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -14,7 +14,7 @@ public class ContactsPage_Selenide extends BasePage_Selenide {
 	Logger logger = Logger.getLogger(ContactsPage_Selenide.class.getName());
 
 	public final SelenideElement contacts = $("#menu-contacts");
-	public final SelenideElement firstName = $x("//a[contains(text(),'Nataliia')]");
+	public final SelenideElement firstName = $("tbody tr td:nth-child(1)");
 	public final SelenideElement fullName = $x("//div[text()='Full name:']/following-sibling::div/p");
 	public final SelenideElement login = $x("//div[text()='Login:']/following-sibling::div/p");
 	public final SelenideElement prefix = $x("//div[text()='Prefix:']/following-sibling::div/p");

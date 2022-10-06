@@ -1,24 +1,25 @@
 package tests;
 
 import api.contacts.*;
+import api.spec.Specifications;
 import io.qameta.allure.internal.shadowed.jackson.core.JsonProcessingException;
 import io.qameta.allure.internal.shadowed.jackson.databind.ObjectMapper;
-import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import pageobjects.pages.BasePage_Selenide;
-import pageobjects.pages.CategoriesPage_Selenide;
-import pageobjects.pages.ContactsPage_Selenide;
-import pageobjects.pages.ManagersPage_Selenide;
+import pageobjects.pages.selenide.BasePage_Selenide;
+import pageobjects.pages.selenide.CategoriesPage_Selenide;
+import pageobjects.pages.selenide.ContactsPage_Selenide;
+import pageobjects.pages.selenide.ManagersPage_Selenide;
 import testdata.TestData;
 import utils.GlobalHelpers;
 import utils.RandomGenerator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -29,6 +30,7 @@ public class Task25 extends BasePage_Selenide {
 	protected CategoriesPage_Selenide categories = new CategoriesPage_Selenide();
 	protected ContactsPage_Selenide contacts = new ContactsPage_Selenide();
 	protected Login login = new Login();
+	private final static String URL = "http://176.36.27.131:8180/rest/";
 
 	Logger logger = Logger.getLogger(Task25.class.getName());
 
@@ -330,16 +332,28 @@ public class Task25 extends BasePage_Selenide {
 	public void contactFlow() throws JsonProcessingException {
 		logger.info("Running a test to create a new contact");
 
-		// Test data
+		Specifications.installSpecification(Specifications.requestSpec(URL), Specifications.responseSpecOK200());
 		Map<String, String> hashMap = new HashMap<>();
-		hashMap.put("emailAddress", "test75657@gmail.com");
-		hashMap.put("email", "comptest@test.com");
-		hashMap.put("name", "New Test Company");
-		hashMap.put("ticketPrefix", "NMTPR");
-		hashMap.put("firstName", "Nataliia");
-		hashMap.put("lastName", "Melnyk");
-		hashMap.put("login", "nmlogin@test.com");
-		hashMap.put("newEmail", "melnyk@test.com");
+		RandomGenerator randomManager = new RandomGenerator();
+
+		// Test data
+		String emailAddress = randomManager.getRandomEmail(6);
+		String email = randomManager.getRandomEmail(7);
+		String companyName = randomManager.getRandomString(8);
+		String prefix = randomManager.getRandomString(4).toUpperCase(Locale.ROOT);
+		String firstName = randomManager.getRandomString(7);
+		String lastName = randomManager.getRandomString(9);
+		String loginContact = randomManager.getRandomEmail(7);
+		String newEmail = randomManager.getRandomEmail(7);
+
+		hashMap.put("emailAddress", emailAddress);
+		hashMap.put("email", email);
+		hashMap.put("name", companyName);
+		hashMap.put("ticketPrefix", prefix);
+		hashMap.put("firstName", firstName);
+		hashMap.put("lastName", lastName);
+		hashMap.put("login", loginContact);
+		hashMap.put("newEmail", newEmail);
 
 		EmailList emailList = new EmailList(false, hashMap.get("emailAddress"), false, false, true);
 
@@ -361,9 +375,8 @@ public class Task25 extends BasePage_Selenide {
 		Response response = given()
 				.sessionId(login.session)
 				.when()
-				.contentType(ContentType.JSON)
 				.body(jsonStr)
-				.post("http://176.36.27.131:8180/rest/contact-with-company")
+				.post("contact-with-company")
 				.then().log().all()
 				.extract().response();
 		JsonPath jsonPath = response.jsonPath();
@@ -389,9 +402,9 @@ public class Task25 extends BasePage_Selenide {
 		contacts.searchCratedContact(hashMap.get("firstName"));
 
 		//  Comparing saved data with field values
-		Assert.assertEquals(hashMap.get("firstName") + " " + hashMap.get("lastName"), contacts.fullName.getText());
-		Assert.assertEquals(hashMap.get("ticketPrefix"), contacts.prefix.getText());
-		Assert.assertEquals(hashMap.get("login"), contacts.login.getText());
+		Assertions.assertEquals(hashMap.get("firstName") + " " + hashMap.get("lastName"), contacts.fullName.getText());
+		Assertions.assertEquals(hashMap.get("ticketPrefix"), contacts.prefix.getText());
+		Assertions.assertEquals(hashMap.get("login"), contacts.login.getText());
 
 		logger.info("Created contact was successfully found in the contacts list");
 
@@ -413,8 +426,10 @@ public class Task25 extends BasePage_Selenide {
 		given()
 				.sessionId(login.session)
 				.when()
-				.delete("http://176.36.27.131:8180/rest/contact/" + contactId)
+				.delete("contact/" + contactId)
 				.then().log().all()
+				.assertThat()
+				.statusCode(200)
 				.extract().response();
 
 		logger.info("Created contact was successfully deleted");

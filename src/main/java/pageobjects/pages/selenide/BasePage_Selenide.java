@@ -1,7 +1,8 @@
-package pageobjects.pages;
+package pageobjects.pages.selenide;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
@@ -9,6 +10,11 @@ import org.junit.Before;
 import static com.codeborne.selenide.Selenide.$;
 
 public class BasePage_Selenide {
+	public static final SelenideElement loginName = $("#username");
+	public static final SelenideElement password = $("#password");
+	public static final SelenideElement signInButton = $("#login-signin");
+
+
 	public void setUp() {
 		WebDriverManager.chromedriver().setup();
 		Configuration.browser = "chrome";
@@ -22,9 +28,9 @@ public class BasePage_Selenide {
 	}
 
 	public static void login(String userName, String userPassword) {
-		$("#username").sendKeys(userName);
-		$("#password").sendKeys(userPassword);
-		$("#login-signin").click();
+		loginName.sendKeys(userName);
+		password.sendKeys(userPassword);
+		signInButton.click();
 	}
 
 	@Before

@@ -1,4 +1,4 @@
-package pageobjects.pages;
+package pageobjects.pages.selenide;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
